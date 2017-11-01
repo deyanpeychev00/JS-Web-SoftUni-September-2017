@@ -1,0 +1,65 @@
+<div class="header-wrapper">
+    <h1 class="header-content">My rent cars:</h1>
+</div>
+<br>
+{{#if cars}}
+    {{#each cars}}
+        <div style="display: inline; text-align: center; marginleft: 50%">
+            <p><b>Brand: </b>{{this.mark}}</p>
+            <p><b>Model: </b>{{this.model}}</p>
+            <div>
+                <img src="{{this.image}}" alt="{{this.mark}} {{this.model}} image" width="30%">
+            </div>
+            <p><b>Year: </b>{{this.year}}</p>
+            <p><b>Price: </b>${{this.price}}</p>
+            <div>
+                <button style="background: #f44336" class="cancelbtn"
+                        onclick="document.getElementById('id02').style.display='block'">End Rental
+                </button>
+            </div>
+            <br><br>
+        </div>
+        <div id="id02" class="conf-modal">
+            <div class="container">
+                <form class="modal-content animate" action="/endRental/{{this.id}}" method="POST">
+                    <h2 style="text-align: center;">Are you sure you want end your rental of this vehicle? </h2>
+                    <button type="submit" style="background: #f44336" class="button">End Rental</button>
+                    <button type="button" style="background: grey" class="button"
+                            onclick="document.getElementById('id02').style.display='none'">Back
+                    </button>
+                </form>
+            </div>
+        </div>
+    {{/each}}
+{{else}}
+    <div style="text-align: center">
+        <p style="text-align: center" class="warning"><i>You don't have any rent cars. Go to our catalog and find a vehicle that suits you best.</i></p>
+    </div>
+{{/if}}
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+
+    function revealConfirm() {
+        // Get the modal
+        let modal = document.getElementById('id02');
+
+// When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
+    // Get the modal
+    let modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>

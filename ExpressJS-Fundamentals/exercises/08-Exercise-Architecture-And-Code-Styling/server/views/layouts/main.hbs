@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Demo Server</title>
+    <link href="/css/site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <ul class="menu">
+                <li><a href="/">Home</a></li>
+                {{#if currentUser}}
+                    <li><a href="/viewAll?page=0">View Free Cars</a></li>
+                    <li><a href="/addCar">Add Car</a></li>
+                    <li><a href="/user/{{currentUser.id}}/myCars">My Owned Cars</a></li>
+                    <li><a href="/user/{{currentUser.id}}/rentCars">My Rent Cars</a></li>
+                    <li>
+                        <form id="logout-form" action="/logout" method="post"></form>
+                        <a href="javascript:document.getElementById('logout-form').submit()">Logout</a>
+                    </li>
+                {{else}}
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>
+                {{/if}}
+            </ul>
+        </header>
+        <main>
+            {{#if globalError}}
+            <span class="alert" style="text-align: center">{{globalError}}</span> {{/if}} {{{body}}}
+        </main>
+    </div>
+</body>
+
+</html>

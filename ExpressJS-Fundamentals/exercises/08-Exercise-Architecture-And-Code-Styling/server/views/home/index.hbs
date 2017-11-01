@@ -1,0 +1,14 @@
+{{#if currentUser}}
+    <div class="container" style="text-align: center">
+        <img src="http://www.freepngimg.com/download/car/1-2-car-png-picture.png" alt="Car home" width="50%"><br>
+        <a class="button" href="/viewAll?page=0" style="text-decoration: none;">View All Cars</a>
+        <a class="button" href="/addCar" style="text-decoration: none;">Add Car</a>
+    </div>
+{{else}}
+    <h1 style="text-align: center">Welcome to our car rentering system!</h1>
+    <h2 style="text-align: center">Please login or register to continue:</h2>
+    <div class="container" style="text-align: center">
+        <a class="button" href="/login" style="text-decoration: none;">Login</a>
+        <a class="button" href="/register" style="text-decoration: none;">Register</a>
+    </div>
+{{/if}}

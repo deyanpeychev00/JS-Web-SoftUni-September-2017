@@ -1,0 +1,32 @@
+<div class="header-wrapper">
+    <h1 class="header-content">Free cars for rent:</h1>
+</div>
+<br>
+{{#if cars}}
+    {{#each cars}}
+        <div style="display: inline; text-align: center; marginleft: 50%" >
+    <!--        too lazy to write separate css-->
+            <p class="info" style="width: 20%; text-align:center; margin-left:40%"><b>Brand: </b>{{this.mark}}</p>
+            <p class="info" style="width: 20%; text-align:center; margin-left:40%"><b>Model: </b>{{this.model}}</p>
+            <div>
+                <img src="{{this.image}}" alt="{{this.mark}} {{this.model}} image" width="30%">
+            </div>
+            <p class="info" style="width: 20%; text-align:center; margin-left:40%"><b>Year: </b>{{this.year}}</p>
+            <p class="info" style="width: 20%; text-align:center; margin-left:40%"><b>Price: </b>${{this.price}}</p>
+            <br>
+            <div>
+                <a class="button" style="text-decoration: none; margin-top: 50px !important" href="details/{{this.id}}">Details</a>
+            </div>
+            <br><br>
+        </div>
+    {{/each}}
+    <div style="text-align: center">
+        <a class="cancelbtn" href="/viewAll?page={{pageObj.prevPage}}" style="color:white; text-decoration: none">Previous Page</a>
+        <a class="cancelbtn" href="/viewAll?page={{pageObj.nextPage}}" style="color:white; text-decoration: none">Next Page</a>
+    </div>
+{{else}}
+    <div style="text-align: center">
+    <p style="text-align: center" class="warning"><i>Sorry, no cars available. Please go to the previous page.</i></p>
+    <a class="cancelbtn" href="/viewAll?page={{pageObj.prevPage}}" style="color:white; text-decoration: none">Previous Page</a>
+    </div>
+{{/if}}

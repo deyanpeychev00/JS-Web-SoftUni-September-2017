@@ -1,0 +1,23 @@
+<div class="header-wrapper">
+    <h1 class="header-content">Add a new car</h1>
+</div>
+<br>
+
+<form action="/addCar/user/{{currentUser.id}}" method="POST">
+    <fieldset>
+        Mark:<br>
+        <input type="text" name="mark" value="" placeholder="Add car mark"><br>
+        Model:<br>
+        <input type="text" name="model" value="" placeholder="Add car model">
+        <br>
+        Image:<br>
+        <input type="text" name="image" value="" placeholder="Add car image (url)"><br>
+        Year:<br>
+        <input type="text" name="year" value="" placeholder="Add car year"><br>
+        <br>
+        Price:<br>
+        <input type="text" name="price" value="" placeholder="Add car price"><br>
+        <br>
+        <input class="button" type="submit" value="Submit">
+    </fieldset>
+</form>

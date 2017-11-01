@@ -1,0 +1,26 @@
+<div class="header-wrapper">
+    <h1 class="header-content">Car Info:</h1>
+</div>
+<br>
+
+<div style="text-align: center">
+    <p class="info"><b>Brand: </b>{{car.mark}}</p>
+    <p class="info"><b>Model: </b>{{car.model}}</p>
+    <div>
+        <img src="{{car.image}}" alt="{{car.mark}} {{car.model}} image" width="50%" height="50%">
+    </div>
+    <p class="info"><b>Year: </b>{{car.year}}</p>
+    <p class="info"><b>Price: </b>${{car.price}}</p>
+    <form action="/rent/{{car.id}}" method="POST">
+        <button type="submit">Rent This Car</button>
+    </form>
+    <button class="cancelbtn" style="background-color: grey !important" onclick="goBack()">Go Back</button>
+    <br><br>
+</div>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+

@@ -1,0 +1,77 @@
+<div style="text-align: center">
+    {{#each car}}
+        <div class="header-wrapper">
+            <h1 class="header-content">Car Info:</h1>
+        </div>
+        <p class="info"><b>Brand: </b>{{this.mark}}</p>
+        <p class="info"><b>Model: </b>{{this.model}}</p>
+        <div>
+            <img src="{{this.image}}" alt="{{this.mark}} {{this.model}} image" width="50%" height="50%">
+        </div>
+        <p class="info"><b>Year: </b>{{this.year}}</p>
+        <p class="info"><b>Price: </b>${{this.price}}</p>
+
+        <div id="id01">
+            <form action="/edit/{{this.id}}" method="POST">
+                <div class="imgcontainer">
+                    <img src="https://maxcdn.icons8.com/Share/icon/nolan/Editing//edit1600.png" alt="Avatar"
+                         class="avatar">
+                </div>
+                <fieldset>
+                    <b style="float: left;">Mark:</b><br>
+                    <input type="text" name="mark" value="{{this.mark}}" placeholder="Add car mark"><br>
+                    <b style="float: left;">Model:</b><br>
+                    <input type="text" name="model" value="{{this.model}}" placeholder="Add car model">
+                    <br>
+                    <b style="float: left;">Image:</b><br>
+                    <input type="text" name="image" value="{{this.image}}" placeholder="Add car image (url)"><br>
+                    <b style="float: left;">Year:</b><br>
+                    <input type="text" name="year" value="{{this.year}}" placeholder="Add car year"><br>
+                    <br>
+                    <b style="float: left;">Price:</b><br>
+                    <input type="text" name="price" value="{{this.price}}" placeholder="Add car price"><br>
+                    <br>
+                    <input class="button" type="submit" value="Edit this car">
+                </fieldset>
+            </form>
+            <button style="background: #f44336" class="button" onclick="document.getElementById('id02').style.display='block'" >Delete</button>
+            <button class="button" style="background-color:grey !important" onclick="goBack()">Go Back</button>
+        </div>
+        <div id="id02" class="conf-modal">
+            <div class="container">
+                <form class="modal-content animate" action="/delete/{{this.id}}" method="POST">
+                    <h2>Are you sure you want to delete this entity?</h2>
+                    <button type="submit" style="background: #f44336" class="button">Delete</button>
+                    <button type="button" style="background: grey" class="button" onclick="document.getElementById('id02').style.display='none'">Back</button>
+                </form>
+            </div>
+        </div>
+    {{/each}}
+</div>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+
+    function revealConfirm() {
+        // Get the modal
+        let modal = document.getElementById('id02');
+
+// When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
+    // Get the modal
+    let modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
