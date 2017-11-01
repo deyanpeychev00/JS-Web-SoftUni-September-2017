@@ -9,12 +9,12 @@
 			</th>
 			<th align="center" width="27%">
 				<h1><a href="https://softuni.bg/">SoftUni</a></h1>
-				<h3>Java Web<br>Development<br>Concentration</h3>
+				<h3>JavaScript Web<br>Development</h3>
 			</th>
 			<th align="center" width="35%">
 				<p>
 					<a title="GitHub Deyan Peychev" href="https://github.com/deyanpeychev00" target="">
-						<img style="text-align:center;" src="https://avatars0.githubusercontent.com/u/25770665?s=200&v=4" alt="" />
+						<img style="text-align:center;" src="https://avatars2.githubusercontent.com/u/24419245?s=460&v=4" alt="" />
 					</a>
 				</p>
 				<!-- for LinkedIn <img src="" alt="LinkedIn" /> -->
@@ -27,7 +27,7 @@
 		</tr>
 		<tr>
 			<td colspan="3">
-				<div>A repository with all my homeworks for the JavaScript Web module at Software University.</div>
+				<div>A repository with all my works for the JavaScript Web module at Software University.</div>
 			</td>
 		</tr>
 	</tbody>
