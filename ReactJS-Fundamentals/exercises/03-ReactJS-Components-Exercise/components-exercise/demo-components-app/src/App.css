@@ -1,0 +1,255 @@
+/*App css*/
+.App {
+    text-align: center;
+}
+
+.App-header {
+    top: 0;
+    padding: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background-color: cornflowerblue;
+    padding-bottom: 20px !important;
+}
+
+.App-subheader {
+    top: 0;
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+    background-color: lightcoral;
+}
+
+.App-subheader > h1 {
+    font-size: 26px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.App-header > h1 {
+    text-transform: uppercase;
+    color: white;
+}
+
+/*slider css*/
+
+@media only screen and (max-width: 500px) {
+    .warper .sliderImg {
+        width: 100%;
+    }
+
+    .warper .slider-button {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    .warper .case-left {
+        left: 0 !important;
+    }
+
+    .warper .case-right {
+        right: 0 !important;
+    }
+}
+
+.warper {
+    display: inline-block;
+    position: relative;
+}
+
+.warper .sliderImg {
+    max-height: 400px;
+}
+
+.warper .slider-button {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 150px;
+    height: 150px;
+}
+
+.warper .case-left {
+    left: -150px;
+}
+
+.warper .case-right {
+    right: -150px;
+}
+
+/*roster css*/
+
+.roster_charImg {
+    margin: 10px;
+    max-height: 200px;
+    display: inline-block;
+    padding: 10px;
+    border: 5px solid darksalmon;
+    cursor: pointer;
+}
+
+.roster_charImg:hover {
+    margin: 10px;
+    max-height: 200px;
+    display: inline-block;
+    padding: 10px;
+    border: 5px solid saddlebrown;
+    cursor: pointer;
+}
+
+/*additional css*/
+.info {
+    width: 100%;
+    background-color: rgb(252, 248, 227);
+    border-bottom-color: rgb(250, 235, 204);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-style: solid;
+    border-bottom-width: 0.989583px;
+    border-image-outset: 0px;
+    border-image-repeat: stretch;
+    border-image-slice: 100%;
+    border-image-source: none;
+    border-image-width: 1;
+    border-left-color: rgb(250, 235, 204);
+    border-left-style: solid;
+    border-left-width: 0.989583px;
+    border-right-color: rgb(250, 235, 204);
+    border-right-style: solid;
+    border-right-width: 0.989583px;
+    border-top-color: rgb(250, 235, 204);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-top-style: solid;
+    border-top-width: 0.989583px;
+    box-sizing: border-box;
+    color: rgb(138, 109, 59);
+    display: block;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    height: 50.8681px;
+    line-height: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.bio_name {
+    background-color: rgb(223, 240, 216);
+    border-bottom-color: rgb(214, 233, 198);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-style: solid;
+    border-bottom-width: 0.989583px;
+    border-image-outset: 0px;
+    border-image-repeat: stretch;
+    border-image-slice: 100%;
+    border-image-source: none;
+    border-image-width: 1;
+    border-left-color: rgb(214, 233, 198);
+    border-left-style: solid;
+    border-left-width: 0.989583px;
+    border-right-color: rgb(214, 233, 198);
+    border-right-style: solid;
+    border-right-width: 0.989583px;
+    border-top-color: rgb(214, 233, 198);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-top-style: solid;
+    border-top-width: 0.989583px;
+    box-sizing: border-box;
+    color: rgb(60, 118, 61);
+    display: block;
+    font-family: Verdana, sans-serif;
+    font-size: 15px;
+    height: 54.2014px;
+    line-height: 22.5px;
+    margin-bottom: 20px;
+    opacity: 1;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 35px;
+    padding-top: 15px;
+    text-size-adjust: 100%;
+    transition-delay: 0s;
+    transition-duration: 0.15s;
+    transition-property: opacity;
+    transition-timing-function: linear;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+fieldset {
+    margin-left: 30%;
+    margin-right: 30%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+fieldset .bio_image {
+    margin: 0 !important;
+    float: left;
+    margin-right: 10px !important;
+}
+
+fieldset > .bio_info {
+    margin: 0;
+    float: right
+}
+
+@media only screen and (max-width: 500px) {
+    fieldset {
+        margin: 0 !important;
+    }
+
+}
+
+/*footer css*/
+
+footer {
+    font-size: 14px !important;
+    background-color: darkgray;
+    bottom: 0;
+    padding-top: 2px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: white;
+}
+
+footer > div > a {
+    color: cornflowerblue;
+    font-weight: bold;
+    border: 3px solid cornflowerblue;
+    text-decoration: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 25px;
+    background-color: white;
+
+}
+
+.dp_link {
+    color: cornflowerblue;
+    font-weight: bold;
+    border: 3px solid white;
+    text-decoration: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 25px;
+    background-color: white;
+}

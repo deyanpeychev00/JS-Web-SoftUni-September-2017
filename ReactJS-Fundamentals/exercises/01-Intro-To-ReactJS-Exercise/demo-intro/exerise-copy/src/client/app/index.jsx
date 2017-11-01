@@ -1,0 +1,1 @@
+console.log('You have successfully setup Webpack!');
