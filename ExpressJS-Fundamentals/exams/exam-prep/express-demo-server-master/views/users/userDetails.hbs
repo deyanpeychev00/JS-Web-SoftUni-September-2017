@@ -1,0 +1,23 @@
+{{#each user}}
+    <br><br>
+    <div class="card">
+        {{#if this.isAdmin}}
+            <img src="https://www.my-opinion.de/online_en/images/icons/profil.png" alt="{{this.username}}"
+                 style="width:50%">
+            <h1>{{this.username}}</h1>
+            <p class="warning"><b>Role: </b>Admin</p>
+
+        {{else}}
+            <img src="https://heroesanini.org/themes/anini/img/admin_avatar.png" alt="{{this.username}}"
+                 style="width:50%">
+            <h1>{{this.username}}</h1>
+            <p class="info"><b>First name: </b>{{this.firstName}}</p>
+            <p class="info"><b>Last name: </b>{{this.lastName}}</p>
+            <p class="warning"><b>Role: </b>User</p>
+        {{/if}}
+
+    </div>
+    {{#if this.isBlocked}}
+        <p class="alert" style="text-align: center">You are temporary blocked. You cannot like or comment existing posts and also cannot add any posts or categories. Please wait until admins unblock you to enjoy the full functionality of our system.</p>
+    {{/if}}
+{{/each}}

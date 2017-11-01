@@ -1,0 +1,47 @@
+<h1>Order details</h1>
+<div class="catalog">
+    <div class="column">
+        <img src="{{donerToOrder.image}}" width="100%">
+    </div>
+    <div class="column">
+        <p class="info"><b>Doner type: </b> {{donerToOrder.category}}</p>
+        <p class="info"><b>Doner size: </b> {{donerToOrder.size}}</p>
+        <p class="info"><b>Date ordered: </b> {{donerToOrder.orderDate}}</p>
+        {{#if donerToOrder.toppins}}
+            <div class="toppings">
+                {{#each donerToOrder.toppings}}
+                    {{this}}
+                    <br>
+                {{/each}}
+            </div>
+        {{/if}}
+    </div>
+    <div class="status">
+        <div class="status-block">
+            <span class="progress-right"></span>
+            <span class="checkpoint current"></span><br>
+            Pending
+        </div>
+        <div class="status-block">
+            <span class="progress-left"></span>
+            <span class="progress-right"></span>
+            <span class="checkpoint"></span><br>
+            In progress
+        </div>
+        <div class="status-block">
+            <span class="progress-left"></span>
+            <span class="progress-right"></span>
+            <span class="checkpoint"></span><br>
+            In transit
+        </div>
+        <div class="status-block">
+            <span class="progress-left"></span>
+            <span class="checkpoint"></span><br>
+            Delivered
+        </div>
+    </div>
+</div>
+
+<div style="text-align:center">
+    <a class="button" href="/">Go to home page</a>
+</div>

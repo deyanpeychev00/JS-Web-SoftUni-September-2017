@@ -1,0 +1,75 @@
+<h1>Welcome to Doner Place!</h1>
+<p>We offer a wide variety of tasty doner kebab, cutosmized to your liking. Choose from different sizes of chicken, beef
+    and lamb and any topping you want. Place your order now!</p>
+{{#if currentUser.isAdmin}}
+    <div style="text-align: center">
+        <div class="product-card"><img
+                src="https://cdn4.iconfinder.com/data/icons/wirecons-free-vector-icons/32/add-128.png"
+                style="width: 100% !important;"><a
+                href="/addProduct" class="button product-title">Add new product</a></div>
+    </div>
+    <div class="products">
+        {{#if chickenDoners}}
+            <h2>Chicken Doner</h2>
+            {{#each chickenDoners}}
+                <div class="product-card"><img src="{{this.image}}" style="width: 100% !important;">
+                    <p class="alert"><b>Size: </b>{{this.size}}cm.</p>
+                    <a href="/editProduct/{{this._id}}" class="button">Edit</a>
+                    <a href="/deleteProduct/{{this._id}}" class="button">Delete</a>
+                </div>
+            {{/each}}
+        {{/if}}
+        {{#if beefDoners}}
+            <h2>Beef Doner</h2>
+            {{#each beefDoners}}
+                <div class="product-card"><img src="{{this.image}}" style="width: 100% !important;">
+                    <p class="alert"><b>Size: </b>{{this.size}}cm.</p>
+                    <a href="/editProduct/{{this._id}}" class="button">Edit</a>
+                    <a href="/deleteProduct/{{this._id}}" class="button">Delete</a>
+                </div>
+            {{/each}}
+        {{/if}}
+        {{#if lambDoners}}
+            <h2>Lamb Doner</h2>
+            {{#each lambDoners}}
+                <div class="product-card"><img src="{{this.image}}" style="width: 100% !important;">
+                    <p class="alert"><b>Size: </b>{{this.size}}cm.</p>
+                    <a href="/editProduct/{{this._id}}" class="button">Edit</a>
+                    <a href="/deleteProduct/{{this._id}}" class="button">Delete</a>
+                </div>
+            {{/each}}
+        {{/if}}
+    </div>
+{{else}}
+    <div class="products">
+        {{#if chickenDoners}}
+            <h2>Chicken Doner</h2>
+            {{#each chickenDoners}}
+                <div class="product-card"><img src="{{this.image}}" style="width: 100% !important;">
+                    <p class="alert"><b>Size: </b>{{this.size}}cm.</p>
+                    <a
+                            href="/customizeOrder/{{this._id}}"
+                            class="button product-title">Order</a></div>
+            {{/each}}
+        {{/if}}
+        {{#if beefDoners}}
+            <h2>Beef Doner</h2>
+            {{#each beefDoners}}
+                <div class="product-card"><img src="{{this.image}}" style="width: 100% !important;">
+                    <p class="alert"><b>Size: </b>{{this.size}}cm.</p>
+                    <a
+                            href="/customizeOrder/{{this._id}}"
+                            class="button product-title">Order</a></div>
+            {{/each}}
+        {{/if}}
+        {{#if lambDoners}}
+            <h2>Lamb Doner</h2>
+            {{#each lambDoners}}
+                <div class="product-card"><img src="{{this.image}}"  style="width: 100% !important;">
+                    <p class="alert"><b>Size: </b>{{this.size}}cm.</p>
+                    <a href="/customizeOrder/{{this._id}}"
+                       class="button product-title">Order</a></div>
+            {{/each}}
+        {{/if}}
+    </div>
+{{/if}}

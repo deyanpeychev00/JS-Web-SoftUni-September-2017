@@ -1,0 +1,25 @@
+<div class="login-page">
+    <div id="loginForm">
+        <div class="header-wrapper">
+            <h1 class="header-content">Log In</h1>
+        </div>
+        <form action="/login" method="POST" class="login-form container">
+            <input type="text" name="username" placeholder="username" />
+            <input type="password" name="password" placeholder="password" />
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <div class="header-wrapper" style="background-color: #003352 !important">
+        <h1 class="header-content">Register</h1>
+    </div>
+    <div class="form container" >
+        <form action="/register" method="POST" class="register-form">
+            <input type="text" name="username" placeholder="name" />
+            <input type="password" name="password" placeholder="password" />
+            <input type="text" name="firstName" placeholder="first name" />
+            <input type="text" name="lastName" placeholder="lirst name" />
+            <button type="submit">Create Account</button>
+        </form>
+    </div>
+</div>

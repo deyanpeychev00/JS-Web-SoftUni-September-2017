@@ -1,0 +1,78 @@
+<div class="header-wrapper">
+    <h1 class="header-content">Manage users</h1>
+</div>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Block</th>
+    </tr>
+    {{#each allUsers}}
+        <tr>
+            <td>{{this._id}}</td>
+            <td>{{this.username}}</td>
+            {{#if this.isAdmin}}
+                <td>Admin</td>
+            {{else}}
+                <td>User</td>
+            {{/if}}
+            {{#if this.isBlocked}}
+                <td>
+                    <div style="text-align: center">
+                        <a href="/unblock/{{this._id}}">
+                            <button style="background: #fb8c00" class="button">
+                                Unblock
+                            </button>
+                        </a>
+                    </div>
+                    {{#if this.isAdmin}}
+                        <div style="text-align: center">
+                            <a href="/makeUser/{{this._id}}">
+                                <button style="background: #5d4037" class="button">
+                                    Make User
+                                </button>
+                            </a>
+                        </div>
+                    {{else}}
+                        <div style="text-align: center">
+                            <a href="/makeAdmin/{{this._id}}">
+                                <button style="background: #388e3c" class="button">
+                                    Make Admin
+                                </button>
+                            </a>
+                        </div>
+                    {{/if}}
+                </td>
+            {{else}}
+                <td>
+                    <div style="text-align: center">
+                        <a href="/block/{{this._id}}">
+                            <button style="background: #f44336" class="button">
+                                Block
+                            </button>
+                        </a>
+                    </div>
+                    {{#if this.isAdmin}}
+                        <div style="text-align: center">
+                            <a href="/makeUser/{{this._id}}">
+                                <button style="background: #5d4037" class="button">
+                                    Make User
+                                </button>
+                            </a>
+                        </div>
+                    {{else}}
+                        <div style="text-align: center">
+                            <a href="/makeAdmin/{{this._id}}">
+                                <button style="background: #388e3c" class="button">
+                                    Make Admin
+                                </button>
+                            </a>
+                        </div>
+                    {{/if}}
+                </td>
+            {{/if}}
+        </tr>
+    {{/each}}
+</table>

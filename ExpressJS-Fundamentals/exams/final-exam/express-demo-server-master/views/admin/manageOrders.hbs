@@ -1,0 +1,13 @@
+<div class="orders">
+    {{#each allOrders}}
+        <div class="order">
+            <span class="order-time"><b>{{this.orderDate}}</b></span>
+            <span class="order-name"><b>Type:</b> {{this.category}} | </span>
+            <span class="order-name"><b>Size:</b> {{this.size}}cm</span>
+            <span class="order-status"><b>Status: </b>{{this.status}}</span>
+            <a href="editOrder/{{this._id}}" class="button order-button" style="background-color: green; color:white;">Edit</a>
+        </div>
+    {{else}}
+        <p class="alert" style="text-align: center">No orders available. Maybe our clients aren't that hungry?</p>
+    {{/each}}
+</div>

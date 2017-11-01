@@ -1,0 +1,24 @@
+<div class="header-wrapper">
+    <h1 class="header-content">Add new hotel</h1>
+</div>
+<div class="login-page">
+  <div class="form">
+    <form action="/addHotel" method="POST" class="create-form">
+      <input type="text" name='title' placeholder="Title"  required/>
+      <input type="text" name='location' placeholder="Location" required />
+      <input type="text" name='image' placeholder="Image Url" required />
+
+      <select class='picker' name="type">
+          {{# each categories}}
+              <option value="{{this.title}}">{{this.title}}</option>
+          {{/each}}
+      </select>
+      <br>
+      <br>
+      <textarea name="description" id="" cols="35" rows="10" placeholder="description" ></textarea>
+      <br>
+
+      <button type="submit">Create Hotel</button>
+    </form>
+  </div>
+</div>

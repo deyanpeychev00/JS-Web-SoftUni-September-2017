@@ -1,0 +1,38 @@
+<div class="header-wrapper">
+    <h1 class="header-content">Hotels</h1>
+</div>
+{{#if currentUser}}
+    {{#if hotels}}
+        {{#each hotels}}
+            <div style="text-align: center">
+                <p class="info"><b>Name: </b>{{this.title}}</p>
+                <p  class="info"><b>Location: </b>{{this.location}}</p>
+                <img class="hotelImg" src="{{this.image}}" alt="hotel image" style="width: 30%">
+                <p  class="info"><b>Description: </b>{{this.description}}</p>
+                <a href="/details?id={{this._id}}"><button class="cancelbtn">Details</button></a>
+            </div>
+        {{/each}}
+        <a href="/list?page={{pages.prevPage}}"><button>Prev</button></a>
+        <a href="/list?page={{pages.nextPage}}"><button>Next</button></a>
+    {{else}}
+        <p class="warning">No more hotels. Please go back to the previous page.</p>
+        <a href="/list?page={{pages.prevPage}}"><button>Prev</button></a>
+    {{/if}}
+{{else}}
+    {{#if hotels}}
+        {{#each hotels}}
+            <div style="text-align: center">
+                <p class="info"><b>Name: </b>{{this.title}}</p>
+                <p  class="info"><b>Location: </b>{{this.location}}</p>
+                <img class="hotelImg" src="{{this.image}}" alt="hotel image" style="width: 30%">
+                <p  class="info"><b>Description: </b>{{this.description}}</p>
+                <p> Please <a href="/loginRegister">login</a> or <a href="/loginRegister">register</a> to see the hotel details.</p>
+            </div>
+        {{/each}}
+        <a href="/list?page={{pages.prevPage}}"><button>Prev</button></a>
+        <a href="/list?page={{pages.nextPage}}"><button>Next</button></a>
+    {{else}}
+        <p class="warning">No more hotels. Please go back to the previous page.</p>
+        <a href="/list?page={{pages.prevPage}}"><button>Prev</button></a>
+    {{/if}}
+{{/if}}

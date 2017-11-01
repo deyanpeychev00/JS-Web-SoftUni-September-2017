@@ -1,0 +1,127 @@
+<h1>Order details</h1>
+<div class="catalog">
+    <div class="column">
+        <img src="{{order.image}}" width="100%">
+    </div>
+    <div class="column">
+        <p class="info"><b>Doner type: </b> {{order.category}}</p>
+        <p class="info"><b>Doner size: </b> {{order.size}}</p>
+        <p class="info"><b>Date ordered: </b> {{order.orderDate}}</p>
+        {{#if order.toppins}}
+            <div class="toppings">
+                {{#each order.toppings}}
+                    {{this}}
+                    <br>
+                {{/each}}
+            </div>
+        {{/if}}
+    </div>
+    {{#if isPending}}
+        <div class="status">
+            <div class="status-block">
+                <span class="progress-right"></span>
+                <span class="checkpoint current"></span><br>
+                Pending
+            </div>
+            <div class="status-block">
+                <span class="progress-left"></span>
+                <span class="progress-right"></span>
+                <span class="checkpoint"></span><br>
+                In progress
+            </div>
+            <div class="status-block">
+                <span class="progress-left"></span>
+                <span class="progress-right"></span>
+                <span class="checkpoint"></span><br>
+                In transit
+            </div>
+            <div class="status-block">
+                <span class="progress-left"></span>
+                <span class="checkpoint"></span><br>
+                Delivered
+            </div>
+        </div>
+    {{/if}}
+    {{#if isInProgress}}
+        <div class="status">
+            <div class="status-block">
+                <span class="progress-right"></span>
+                <span class="checkpoint"></span><br>
+                Pending
+            </div>
+            <div class="status-block">
+                <span class="progress-left"></span>
+                <span class="progress-right"></span>
+                <span class="checkpoint current"></span><br>
+                In progress
+            </div>
+            <div class="status-block">
+                <span class="progress-left"></span>
+                <span class="progress-right"></span>
+                <span class="checkpoint"></span><br>
+                In transit
+            </div>
+            <div class="status-block">
+                <span class="progress-left"></span>
+                <span class="checkpoint"></span><br>
+                Delivered
+            </div>
+        </div>
+    {{/if}}
+    {{#if isInTransit}}
+        <div class="status">
+            <div class="status-block">
+                <span class="progress-right"></span>
+                <span class="checkpoint"></span><br>
+                Pending
+            </div>
+            <div class="status-block">
+                <span class="progress-left"></span>
+                <span class="progress-right"></span>
+                <span class="checkpoint "></span><br>
+                In progress
+            </div>
+            <div class="status-block">
+                <span class="progress-left"></span>
+                <span class="progress-right"></span>
+                <span class="checkpoint current"></span><br>
+                In transit
+            </div>
+            <div class="status-block">
+                <span class="progress-left"></span>
+                <span class="checkpoint"></span><br>
+                Delivered
+            </div>
+        </div>
+    {{/if}}
+    {{#if isDelivered}}
+        <div class="status">
+            <div class="status-block">
+                <span class="progress-right"></span>
+                <span class="checkpoint"></span><br>
+                Pending
+            </div>
+            <div class="status-block">
+                <span class="progress-left"></span>
+                <span class="progress-right"></span>
+                <span class="checkpoint "></span><br>
+                In progress
+            </div>
+            <div class="status-block">
+                <span class="progress-left"></span>
+                <span class="progress-right"></span>
+                <span class="checkpoint"></span><br>
+                In transit
+            </div>
+            <div class="status-block">
+                <span class="progress-left"></span>
+                <span class="checkpoint current"></span><br>
+                Delivered
+            </div>
+        </div>
+    {{/if}}
+</div>
+
+<div style="text-align:center">
+    <button class="button" style="border:none !important" onclick="window.history.back();">Back</button>
+</div>

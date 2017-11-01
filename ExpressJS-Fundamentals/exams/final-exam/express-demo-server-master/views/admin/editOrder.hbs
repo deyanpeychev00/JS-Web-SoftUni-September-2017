@@ -1,0 +1,36 @@
+<h1>Order details</h1>
+<div class="catalog">
+    <div class="column">
+        <img src="{{order.image}}" width="100%">
+    </div>
+    <div class="column">
+        <p class="info"><b>Doner type: </b> {{order.category}}</p>
+        <p class="info"><b>Doner size: </b> {{order.size}}</p>
+        <p class="info"><b>Date ordered: </b> {{order.orderDate}}</p>
+        {{#if order.toppins}}
+            <div class="toppings">
+                {{#each order.toppings}}
+                    {{this}}
+                    <br>
+                {{/each}}
+            </div>
+        {{/if}}
+        <p class="info"><b>Order status: </b> {{order.status}}</p>
+        <div class="alert" style="width: 100%">
+            <h2 style="width: 100%">Change order status:</h2>
+        </div>
+        <form action="/editOrder/{{order._id}}" method="POST">
+            <span>
+                <select name="status">
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="In Transit">In Transit</option>
+                    <option value="Delivered">Delivered</option>
+                </select>
+            </span>
+            <div style="text-align:center">
+                <button class="button" style="border:none; margin-top: 30px; float:left" type="submit">Edit Order</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<h1>Customize your order</h1>
+    <form method="post" action="/orderProduct/{{currentUser._id}}">
+        <div class="catalog">
+            <div class="column">
+                <img src="{{foundDoner.image}}" width="50%">
+            </div>
+            <div class="column">
+                <p class="info"><b>Doner type: </b>{{foundDoner.category}}</p>
+                <p class="info"><b>Doner size: </b>{{foundDoner.size}}cm.</p>
+                <h3>Toppings</h3>
+                <div class="toppings">
+                        <input name="product_id" type="hidden" value="{{foundDoner._id}}">
+                        {{#if foundDoner.toppings}}
+                            {{#each foundDoner.toppings}}
+                                <input id="{{this}}" name="toppings" type="checkbox" value="{{this}}"><label
+                                    for="{{this}}">{{this}}</label><br>
+                            {{/each}}
+                        {{else}}
+                            <p>This product has no toppings options.</p>
+                        {{/if}}
+                </div>
+                <input type="submit" value="Checkout" class="button" style="border:0"/>
+            </div>
+        </div>
+    </form>

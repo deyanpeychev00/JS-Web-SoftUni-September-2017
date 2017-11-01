@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Demo Server</title>
+    <link href="/css/site.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+    <header>
+        <h1 style="text-align: center">Doner Place</h1>
+        {{#if currentUser}}
+            <div style="text-align: center">
+                <p class="alert-greeting">Welcome, <b>{{currentUser.username}}</b></p>
+            </div>
+        {{/if}}
+        <ul class="menu">
+            <li><a class="button" href="/">Home</a></li>
+            {{#if currentUser}}
+                {{#if currentUser.isAdmin}}
+                    <li><a class="button" href="/manageOrders">Manage Orders</a></li>
+                {{else}}
+                    <li><a class="button" href="/orderStatus/{{currentUser._id}}">Order Status</a></li>
+                {{/if}}
+                <li style="float: right">
+                    <form id="logout-form" action="/logout" method="post"></form>
+                    <a class="button" href="javascript:document.getElementById('logout-form').submit()">Logout</a>
+                </li>
+            {{else}}
+                <li><a class="button" href="/login">Login</a></li>
+                <li><a class="button" href="/register">Register</a></li>
+            {{/if}}
+        </ul>
+    </header>
+    <main>
+        {{#if globalError}}
+            <span class="error">{{globalError}}</span> {{/if}} {{{body}}}
+    </main>
+    <footer>Doner Place &copy; 2017</footer>
+</div>
+</body>
+</html>
