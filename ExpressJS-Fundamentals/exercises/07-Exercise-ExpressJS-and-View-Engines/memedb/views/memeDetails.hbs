@@ -1,0 +1,9 @@
+<div class="content">
+        {{#each memes}}
+            <img src="{{this.memeURL}}" alt="">
+            <h3>{{this.memeName}}</h3>
+            <p>{{this.memeDescription}}</p>
+            <button><a href="{{this.memeURL}}" download="{{this.memeName}}.jpg">Download Meme</a></button>
+        {{/each}}
+
+</div>
