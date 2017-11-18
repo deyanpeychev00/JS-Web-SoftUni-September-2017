@@ -1,3 +1,3 @@
-Project Starter Kit for React. Features:
-- Routing
-- User authentication: Register/Login/Logout
+```javascript
+console.log('ReactJS final exam app.');
+```
