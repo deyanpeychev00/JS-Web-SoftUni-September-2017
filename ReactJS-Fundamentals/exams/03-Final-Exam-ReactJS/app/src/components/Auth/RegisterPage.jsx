@@ -30,7 +30,7 @@ export default class RegisterPage extends Component {
         console.log(response);
         if (response.success) {
             toastr.success(response.message + '\n Redirecting to login...');
-            setTimeout(() => {window.location.replace('/login')}, 3000);
+            setTimeout(() => {window.location.replace('/login')}, 2000);
         } else {
             toastr.error(response.message);
         }

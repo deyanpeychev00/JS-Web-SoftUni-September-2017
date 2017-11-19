@@ -60,4 +60,62 @@ async function login(email, password) {
     return await res.json();
 }
 
-export { register, login };
+async function getYearlyBalance() {
+    const res = await fetch(host + 'plan/'+new Date().getFullYear(), {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'bearer ' + localStorage.getItem('authtoken')
+        }
+    });
+    return await res.json();
+}
+
+async function getMonthlyBallance(monthNum) {
+    const res = await fetch(host + `plan/${new Date().getFullYear()}/${monthNum}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'bearer ' + localStorage.getItem('authtoken')
+        }
+    });
+    return await res.json();
+}
+
+async function updateMonthIncome(obj, monthNum) {
+
+    const res = await fetch(host + `plan/${new Date().getFullYear()}/${monthNum}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'bearer ' + localStorage.getItem('authtoken')
+        },
+        body: JSON.stringify(obj)
+    });
+    return await res.json();
+}
+
+async function postExpense(obj, monthNum) {
+    const res = await fetch(host + `plan/${new Date().getFullYear()}/${monthNum}/expense`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'bearer ' + localStorage.getItem('authtoken')
+        },
+        body: JSON.stringify(obj)
+    });
+    return await res.json();
+}
+
+async function removeExpense(id) {
+    const res = await fetch(host + `plan/expense/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'bearer ' + localStorage.getItem('authtoken')
+        },
+    });
+    return await res.json();
+}
+
+export { register, login, getYearlyBalance, getMonthlyBallance, updateMonthIncome, postExpense, removeExpense };

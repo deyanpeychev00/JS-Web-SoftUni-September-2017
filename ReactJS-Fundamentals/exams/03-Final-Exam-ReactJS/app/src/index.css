@@ -7,6 +7,7 @@ body {
 .container {
     margin-left: 8%;
     padding: 1px 16px;
+    margin-bottom: 4%;
 }
 
 ul {
@@ -38,7 +39,7 @@ li NavLink, li a {
     font-weight: bold;
 }
 
-li a.active {
+li NavLink.active, li a.active {
     background-color: #64b5f6;
     color: white;
     text-transform: uppercase;
@@ -70,7 +71,7 @@ h1 {
     text-transform: uppercase;
 }
 
-input[type=text], input[type=password], input[type=number] {
+input[type=text], input[type=password], input[type=number], select {
     width: 30%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -82,7 +83,7 @@ input[type=text], input[type=password], input[type=number] {
     outline: none;
 }
 
-input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
+input[type=text]:focus, input[type=password]:focus, input[type=number]:focus, select:focus {
     border: 3px solid #555;
 }
 
@@ -110,6 +111,50 @@ input[type=submit] {
 .button:hover {
     background-color: white;
     color: #008CBA;
+}
+
+.delete:hover {
+    background-color: white !important;
+    color: #ef5350 !important;
+}
+
+.confirm:hover{
+    background-color: #66bb6a !important;
+    color: white !important;
+}
+
+.confirm {
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: white !important;
+    color: #66bb6a !important;
+    font-weight: bold;
+    border: 2px solid #66bb6a !important;
+    border-radius: 5px;
+}
+
+.delete {
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: #ef5350 !important;
+    color: white !important;
+    font-weight: bold;
+    border: 2px solid #ef5350 !important;
+    border-radius: 5px;
 }
 
 .button {
@@ -203,7 +248,7 @@ input[type=submit]:hover {
     transition-duration: 0.15s;
     transition-property: opacity;
     transition-timing-function: linear;
-    width: 885.608px;
+    width: 97%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     margin-left: 30px;
 }
@@ -213,7 +258,7 @@ input[type=submit]:hover {
 }
 
 .footer {
-    position: absolute;
+    position: fixed;
     right: 0;
     bottom: 0;
     left: 0;
@@ -273,4 +318,18 @@ input[type=submit]:hover {
 .auth-sublink:hover{
     color: #1565c0;
     transition: color 0.5s;
+}
+
+.card-wide{
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
 }

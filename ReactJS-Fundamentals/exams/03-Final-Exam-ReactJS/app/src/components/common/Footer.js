@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 
 export default class Footer extends Component {
     render() {
@@ -7,7 +6,6 @@ export default class Footer extends Component {
 
         return (
             <div className="footer">
-                {loggedIn && <span className="left">Welcome, <strong>{localStorage.getItem('username')}</strong></span>}
                 ReactJS exam, November 2017 |
                 <strong><a className="softUni" href="https://softuni.bg/" target="_blank"> Software University</a></strong> |
                 Designed by:
