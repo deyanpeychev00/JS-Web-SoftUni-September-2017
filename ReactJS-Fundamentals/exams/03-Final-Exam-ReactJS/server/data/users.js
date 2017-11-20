@@ -1,5 +1,19 @@
-const usersById = { '1': { email: 'pesho@abv.bg', password: 'pppp', name: 'pesho', id: 1 } };
-const usersByEmail = { 'pesho@abv.bg': { email: 'pesho@abv.bg', password: 'pppp', name: 'pesho', id: 1 } };
+const usersById = {
+    '1': {
+        email: 'pesho@abv.bg',
+        password: 'pppp',
+        name: 'pesho',
+        id: 1
+    }
+};
+const usersByEmail = {
+    'pesho@abv.bg': {
+        email: 'pesho@abv.bg',
+        password: 'pppp',
+        name: 'pesho',
+        id: 1
+    }
+};
 
 module.exports = {
     save: (user) => {
