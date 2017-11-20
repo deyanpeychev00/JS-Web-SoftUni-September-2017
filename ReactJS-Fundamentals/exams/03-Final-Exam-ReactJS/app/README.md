@@ -1,3 +1,3 @@
 ```javascript
-console.log('ReactJS final exam app.');
+console.log('ReactJS final exam app');
 ```
