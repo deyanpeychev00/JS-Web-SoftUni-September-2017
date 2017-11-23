@@ -1,0 +1,13 @@
+<h1>Games list</h1>
+<p>Pick a game: </p>
+<ul>
+  <li *ngFor="let game of games">
+    {{game.title}} - {{game.publisher}}
+    <span *ngIf="game.price >= 100"> - ${{game.price}}</span>
+  </li>
+</ul>
+<button (click)="showContent()">{{buttonContent}}</button>
+
+<div [class.content]="isSpecial" *ngIf="contentIsShown">Adittional content</div>
+<br/>
+<img [attr.src]="imgUrl" />

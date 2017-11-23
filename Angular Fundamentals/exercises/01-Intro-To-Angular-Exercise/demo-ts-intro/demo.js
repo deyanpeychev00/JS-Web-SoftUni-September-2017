@@ -16,7 +16,7 @@ console.log('----------');
 // jQuery
 //let naze = document.querySelector('.pesho');
 // classes
-var Car = /** @class */ (function () {
+var Car = (function () {
     function Car(color, engine) {
         this.color = color;
         this.engine = engine;
