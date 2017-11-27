@@ -27,3 +27,7 @@ nav a:hover {
 nav a.active {
   color: #039be5;
 }
+
+agm-map {
+  height: 300px;
+}

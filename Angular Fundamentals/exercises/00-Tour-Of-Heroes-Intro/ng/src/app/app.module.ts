@@ -11,6 +11,8 @@ import {MessagesComponent} from './messages/messages.component';
 import {MessageService} from './message.service';
 import {AppRoutingModule} from './/app-routing.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import { SampleMapComponent } from './sample-map/sample-map.component';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import {DashboardComponent} from './dashboard/dashboard.component';
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    SampleMapComponent
   ],
   imports: [
     BrowserModule,

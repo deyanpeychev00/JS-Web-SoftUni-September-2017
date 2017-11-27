@@ -1,0 +1,48 @@
+<div class="header-wrapper">
+  <h1 class="header center white-text text-lighten-2">Register</h1>
+</div>
+<div class="text-wrapper">
+  <p>Join us and get a unique experience using <b>STORAGR</b></p>
+  <p><b>Please fill the form below:</b></p>
+</div>
+<br/>
+<form class="col s10 offset-s1">
+  <div class="row">
+    <div class="input-field col s5 offset-s1">
+      <div class="col-sm-4 ">
+        <i class="material-icons">language</i> Email
+        <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="email" required>
+      </div>
+    </div>
+    <div class="input-field col s5">
+      <div class="col-sm-4 ">
+        <i class="material-icons">person_pin</i> Username
+        <input type="text" class="form-control" id="inputFullName" placeholder="Username" required name="fullName">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s5 offset-s1">
+      <div class="col-sm-4">
+        <i class="material-icons">lock</i> Password
+        <input type="password" class="form-control" id="inputPassword" placeholder="Password" required name="password">
+      </div>
+    </div>
+    <div class="input-field col s5">
+      <div class="col-sm-4">
+        <i class="material-icons">lock</i> Confirm Password
+        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required name="repeatedPassword">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4 center">
+      <button type="reset" class="btn btn-default grey" (click)="getBack()">Back</button>
+      <button type="submit" class="btn btn-primary green">Register</button>
+      <br><br>
+      <span>Already have account?</span>
+      <span><a routerLink="/login">Log In</a></span>
+    </div>
+    <br><br>
+  </div>
+</form>
