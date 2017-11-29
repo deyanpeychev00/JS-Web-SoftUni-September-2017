@@ -15,6 +15,7 @@ import { RouterAuthService } from './router-auth.service';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,7 @@ import { RouterAuthService } from './router-auth.service';
     LoginPageComponent,
     CatalogComponent,
     ItemComponent,
-    AddProductComponent
+    AddProductComponent,
   ],
   imports: [
     BrowserModule,

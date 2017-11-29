@@ -1,19 +1,25 @@
-.card-image-min {
-  height: 300px;
+.item-wrapper{
+  height: 350px;
 }
 
-.card-margin {
-  margin-top: 50px;
-  margin-left: 50px;
-  margin-right: 50px;
+.card-image-min{
+  height: 306px;
 }
-
 .align-content-center{
   text-align: center;
 }
 
-.tags{
-  color: #ffb74d;
-  font-style: italic;
+span.tags{
+  color: dodgerblue !important;
+  font-weight: bold;
+  font-style: italic ;
+}
+
+.card{
+  margin: 0;
+}
+
+.details-btn{
+  margin-right: 50px;
 }
 

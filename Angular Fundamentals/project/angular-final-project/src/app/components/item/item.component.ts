@@ -8,9 +8,12 @@ import {Component, Input, OnInit} from '@angular/core';
 export class ItemComponent implements OnInit {
   @Input() item;
   @Input() permissions;
+  @Input() tags;
+  isAdmin;
   constructor() { }
 
   ngOnInit() {
+    this.isAdmin = localStorage.getItem('role') !== 'init';
   }
 
 }

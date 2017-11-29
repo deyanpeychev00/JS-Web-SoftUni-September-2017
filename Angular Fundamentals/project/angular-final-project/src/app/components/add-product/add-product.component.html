@@ -1,3 +1,57 @@
-<p>
-  add-product works!
-</p>
+<div class="header-wrapper">
+  <h1 class="header center white-text text-lighten-2">Add product</h1>
+</div>
+<div class="text-wrapper">
+  <p><b>Please fill the form below:</b></p>
+</div>
+<br/><br/>
+<div class="container">
+  <div class="row">
+    <form class="col s12" (ngSubmit)="submitAddProduct()">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="name" type="text" class="validate" name="name" [(ngModel)]="name">
+          <label data-error="Invalid data" for="name">Product Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input value="I am not editable" name="quantity" id="quantity" type="number" class="validate" [(ngModel)]="quantity">
+          <label data-error="Invalid data" for="quantity">Quantity</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="price" type="number" name="price" class="validate" [(ngModel)]="price">
+          <label data-error="Invalid data" for="price">Price</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="imageUrl" type="text" name="imageUrl" class="validate" [(ngModel)]="imageUrl">
+          <label data-error="Invalid data" for="imageUrl">Image URL</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="description" class="materialize-textarea" name="description" [(ngModel)]="description"></textarea>
+          <label for="description">Description</label>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <p>Storage Locations: </p>
+          <input id="storageLocations" type="text" name="storageLocations" class="validate" [(ngModel)]="storageLocations" value="{{storageLocations}}">
+        </div>
+        <div class="input-field col s4">
+          <p>Tags: </p>
+          <input id="tags" type="text" name="tags" class="validate" [(ngModel)]="tags" placeholder="Write tags, separated with comma">
+        </div>
+        <div class="input-field col s2">
+          <button type="submit" class="btn btn-primary green">Add Product</button>
+          <br/>
+          <br/>
+          <button type="reset" class="btn btn-default grey" (click)="getBack()">Back</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

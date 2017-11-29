@@ -1,5 +1,13 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 footer{
   position: fixed;
   width:100%;
   bottom:0 !important;
+}
+.page-footer{
+  padding-top: 0;
 }
