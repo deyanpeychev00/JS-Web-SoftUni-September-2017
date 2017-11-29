@@ -1,13 +1,13 @@
 import L from 'leaflet';
 
-export default function loadMap() {
-
+function loadMainMap() {
   const BG = [42.7249925, 25.4833039];
   const zoomLevel = 7;
+  const API = 'pk.eyJ1IjoiZGV5YW5wcGV5Y2hldiIsImEiOiJjajk0OHp1OHM0MTVsMnFtYnpvMmN2OHZjIn0.56yRPY_ti-lHyhTETtaXKg';
 
   const mymap = L.map('mapid').setView(BG, zoomLevel);
 
-  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGV5YW5wcGV5Y2hldiIsImEiOiJjajk0OHp1OHM0MTVsMnFtYnpvMmN2OHZjIn0.56yRPY_ti-lHyhTETtaXKg', {
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token='+API, {
     maxZoom: 18,
     id: 'mapbox.streets',
     accessToken: 'your.mapbox.access.token'
@@ -27,3 +27,6 @@ export default function loadMap() {
   });
 }
 
+export {
+  loadMainMap
+};

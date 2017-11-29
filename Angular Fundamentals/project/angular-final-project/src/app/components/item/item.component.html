@@ -1,0 +1,24 @@
+<div class="card col s3 card-margin align-content-center">
+    <div class="card-image waves-effect waves-block waves-light" *ngIf="item.imageUrl">
+      <img class="activator card-image-min" src="{{item.imageUrl}}" alt="{{item.name}}">
+    </div>
+  <div class="card-image waves-effect waves-block waves-light" *ngIf="!item.imageUrl">
+    <img class="activator card-image-min" src="https://lh3.google.com/u/0/d/1Q8qvS_w_DeskDCxyQIQ8J7MYxF0GtQ97=w1920-h959-iv1" alt="{{item.name}}">
+  </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">{{item.name}}<i class="material-icons right">more_vert</i></span>
+      <p *ngIf="permissions">
+        <button type="submit" class="btn btn-primary green"><a class="white-text" routerLink="#">Details</a></button>
+      </p>
+      <p *ngIf="!permissions">
+        <a class="red-text" routerLink="/login">Please log in to see details</a>
+      </p>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">{{item.name}}<i class="material-icons right">close</i></span>
+      <br/>
+      <b>Description: </b><p>{{item.description}}</p>
+      <b>Price: </b><p>${{item.price}}</p>
+      <b>Category: </b><p class="tags">#{{item.category}}</p>
+    </div>
+  </div>

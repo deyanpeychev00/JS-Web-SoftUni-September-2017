@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import loadMap from './load-main-map';
+import {loadMainMap} from '../../../utils/map-utilities';
 
 @Component({
   selector: 'app-main-map',
@@ -7,11 +7,12 @@ import loadMap from './load-main-map';
   styleUrls: ['./main-map.component.css']
 })
 export class MainMapComponent implements OnInit {
-
+  mapLoaded: boolean = false;
   constructor() { }
 
   ngOnInit() {
-    loadMap();
+    loadMainMap();
+    this.mapLoaded = true;
   }
 
 }

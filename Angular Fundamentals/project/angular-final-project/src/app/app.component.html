@@ -1,7 +1,9 @@
-<nav class="black">
+<nav class="nav-container">
   <div class="nav-wrapper container">
     <a id="logo-container" routerLink="/" class="brand-logo"><img src="http://oi66.tinypic.com/2vigqkh.jpg" height="42" width="197" alt="logo"/></a>
     <ul class="right nav-ul" *ngIf="logged">
+      <li><span class="chip">Welcome, <b>{{username}}</b></span></li>
+      <li *ngIf="admin"><a routerLink="/add-product">Add Product</a></li>
       <li><a routerLink="/catalog">Catalog</a></li>
       <li><a routerLink="/my-orders">My Orders</a></li>
       <li><a routerLink="/logout" (click)="logOut()">Log Out</a></li>

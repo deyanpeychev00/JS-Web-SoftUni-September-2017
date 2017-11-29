@@ -3,10 +3,14 @@
 </div>
 <div class="text-wrapper">
   <p><b>STORAGR</b> covers some of the biggest Bulgarian cities, giving our users fast and quality delivery.</p>
-  <button type="submit" class="btn btn-primary green"><a class="white-text" routerLink="/catalog">Explore our store</a> <i class="tiny material-icons">shopping_basket</i></button>
+  <button type="submit" class="btn btn-primary green"><a class="white-text" routerLink="/catalog">Explore our store</a></button>
   <p><b>Our storages:</b></p>
 </div>
-
+<div class="row" *ngIf="!mapLoaded">
+  <div class="progress">
+    <div class="indeterminate"></div>
+  </div>
+</div>
 <div id="mapid"></div>
 
 

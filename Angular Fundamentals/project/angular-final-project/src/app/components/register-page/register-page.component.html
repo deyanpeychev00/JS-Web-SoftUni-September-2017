@@ -6,18 +6,18 @@
   <p><b>Please fill the form below:</b></p>
 </div>
 <br/>
-<form class="col s10 offset-s1">
+<form class="col s10 offset-s1" (ngSubmit)="submitRegister()">
   <div class="row">
     <div class="input-field col s5 offset-s1">
       <div class="col-sm-4 ">
         <i class="material-icons">language</i> Email
-        <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="email" required>
+        <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="email"  [(ngModel)]="email" required>
       </div>
     </div>
     <div class="input-field col s5">
       <div class="col-sm-4 ">
         <i class="material-icons">person_pin</i> Username
-        <input type="text" class="form-control" id="inputFullName" placeholder="Username" required name="fullName">
+        <input type="text" class="form-control" id="inputFullName" placeholder="Username" required  [(ngModel)]="username" name="username">
       </div>
     </div>
   </div>
@@ -25,13 +25,13 @@
     <div class="input-field col s5 offset-s1">
       <div class="col-sm-4">
         <i class="material-icons">lock</i> Password
-        <input type="password" class="form-control" id="inputPassword" placeholder="Password" required name="password">
+        <input type="password" class="form-control" id="inputPassword" placeholder="Password" required [(ngModel)]="password" name="password">
       </div>
     </div>
     <div class="input-field col s5">
       <div class="col-sm-4">
         <i class="material-icons">lock</i> Confirm Password
-        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required name="repeatedPassword">
+        <input type="password" class="form-control" id="repeatedPassword" placeholder="Confirm Password" required [(ngModel)]="repeatedPassword" name="repeatedPassword">
       </div>
     </div>
   </div>

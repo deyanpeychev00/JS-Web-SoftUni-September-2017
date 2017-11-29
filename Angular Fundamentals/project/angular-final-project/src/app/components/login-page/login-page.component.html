@@ -5,12 +5,12 @@
   <p><b>Please fill the form below:</b></p>
 </div>
 <br/>
-<form class="col s10 offset-s1">
+<form class="col s10 offset-s1" (ngSubmit)="submitLogin()">
   <div class="row">
     <div class="input-field col s4 offset-s4">
       <div class="col-sm-4 ">
         <i class="material-icons">person_pin</i> Username
-        <input type="text" class="form-control" id="inputFullName" placeholder="Username" required name="fullName">
+        <input type="text" class="form-control" id="inputFullName" placeholder="Username" required name="username" [(ngModel)]="username">
       </div>
     </div>
   </div>
@@ -18,7 +18,7 @@
     <div class="input-field col s4 offset-s4">
       <div class="col-sm-4">
         <i class="material-icons">lock</i> Password
-        <input type="password" class="form-control" id="inputPassword" placeholder="Password" required name="password">
+        <input type="password" class="form-control" id="inputPassword" placeholder="Password" required name="password" [(ngModel)]="password">
       </div>
     </div>
   </div>

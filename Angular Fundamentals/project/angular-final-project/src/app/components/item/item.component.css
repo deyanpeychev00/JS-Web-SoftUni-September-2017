@@ -1,0 +1,19 @@
+.card-image-min {
+  height: 300px;
+}
+
+.card-margin {
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.align-content-center{
+  text-align: center;
+}
+
+.tags{
+  color: #ffb74d;
+  font-style: italic;
+}
+

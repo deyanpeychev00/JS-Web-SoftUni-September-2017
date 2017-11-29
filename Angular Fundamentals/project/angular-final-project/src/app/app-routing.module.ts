@@ -1,26 +1,32 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import {MainMapComponent} from './main-map/main-map.component';
-import {RegisterPageComponent} from "./register-page/register-page.component";
-import {LoginPageComponent} from "./login-page/login-page.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {MainMapComponent} from './components/main-map/main-map.component';
+import {RegisterPageComponent} from "./components/register-page/register-page.component";
+import {LoginPageComponent} from "./components/login-page/login-page.component";
+import {CatalogComponent} from "./components/catalog/catalog.component";
+import {AddProductComponent} from "./components/add-product/add-product.component";
+
 
 let homeComponent;
 
-if(localStorage.getItem('authtoken') !== null){
+if (localStorage.getItem('authtoken') !== null) {
   homeComponent = '';
-}else{
+} else {
   homeComponent = 'asd';
 }
 
 const routes: Routes = [
-  { path: '', redirectTo: '/map', pathMatch: 'full' },
-  { path: 'map', component: MainMapComponent},
-  { path: 'register', component: RegisterPageComponent},
-  { path: 'login', component: LoginPageComponent}
+  {path: '', redirectTo: '/map', pathMatch: 'full'},
+  {path: 'map', component: MainMapComponent},
+  {path: 'register', component: RegisterPageComponent},
+  {path: 'login', component: LoginPageComponent},
+  {path: 'catalog', component: CatalogComponent},
+  {path: 'add-product', component: AddProductComponent}
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

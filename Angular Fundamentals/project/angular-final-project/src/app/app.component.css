@@ -47,3 +47,11 @@ p {
 footer.page-footer {
   margin: 0;
 }
+
+.nav-container{
+  background-color: #222222;
+}
+
+ul.nav-ul > li > a:hover{
+  color: #1e88e5;
+}

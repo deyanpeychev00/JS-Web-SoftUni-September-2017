@@ -1,0 +1,35 @@
+.header-wrapper{
+  margin: 0;
+  background-color: #1e88e5;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.header-wrapper > h1{
+  margin: 0;
+  padding: 10px;
+  color: white;
+}
+
+
+.text-wrapper{
+  margin: 0;
+  background-color: #1e88e5;
+  text-align: center;
+}
+
+.text-wrapper > p{
+  margin: 0;
+  padding: 10px;
+  color: white;
+}
+.text-wrapper-additional{
+  padding: 5px;
+  margin: 0 !important;
+  background-color: #01579b;
+  text-align: center;
+}
+
+.login-anchor{
+  color: #e1f5fe;
+}

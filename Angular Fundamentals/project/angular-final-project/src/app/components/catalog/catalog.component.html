@@ -1,0 +1,24 @@
+<div class="header-wrapper">
+  <h1 class="header center white-text text-lighten-2">Our Products</h1>
+</div>
+<div class="text-wrapper">
+  <p><b>Explore our catalog and find various items for your needs:</b></p>
+</div>
+<div class="text-wrapper-additional" *ngIf="!permissions">
+  <p>
+    <b class="white-text">Please log in to see items details: </b>
+    <a class="login-anchor" routerLink="/login">Log In</a>
+  </p>
+</div>
+<div class="container">
+  <div class="row" *ngIf="catalog">
+    <div *ngFor="let item of catalog">
+      <app-item [item]="item" [permissions]="permissions"></app-item>
+    </div>
+  </div>
+  <div class="row" *ngIf="!catalog">
+    <div class="progress">
+      <div class="indeterminate"></div>
+    </div>
+  </div>
+</div>
