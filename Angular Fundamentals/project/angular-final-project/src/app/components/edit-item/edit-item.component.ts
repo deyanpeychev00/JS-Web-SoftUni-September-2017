@@ -89,7 +89,6 @@ export class EditItemComponent implements OnInit {
           this.availableLocations[this.availableLocations.indexOf(this.locations[lcp]['name'])] = this.locations[lcp]['_id'];
         }
     }
-    console.log(this.availableLocations);
     if(this.name === '' || this.description === '' || this.price === null || this.quantity === null || this.imageUrl==='' || this.tags[0] === ''){
       this.toastr.errorToast('Please fill the form fields.');
       return;
@@ -99,7 +98,6 @@ export class EditItemComponent implements OnInit {
       return;
     }
     const editedObj = {name: this.name, description: this.description, quantity: Number(this.quantity), price: Number(this.price), imageUrl: this.imageUrl, category: this.tags, storageLocation: this.availableLocations};
-    console.log(editedObj);
     const res = await this.catalogService.postUpdateItem(productId, editedObj, localStorage.getItem('authtoken'));
     if (res.error) {
       this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
