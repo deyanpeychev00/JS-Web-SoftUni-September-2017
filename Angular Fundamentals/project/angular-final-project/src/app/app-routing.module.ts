@@ -6,6 +6,7 @@ import {LoginPageComponent} from "./components/login-page/login-page.component";
 import {CatalogComponent} from "./components/catalog/catalog.component";
 import {AddProductComponent} from "./components/add-product/add-product.component";
 import {ItemDetailsComponent} from "./components/item-details/item-details.component";
+import {EditItemComponent} from "./components/edit-item/edit-item.component";
 
 
 let homeComponent;
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path: 'login', component: LoginPageComponent},
   {path: 'catalog', component: CatalogComponent},
   {path: 'add-product', component: AddProductComponent},
-  {path: 'items/details/:id', component: ItemDetailsComponent}
+  {path: 'items/details/:id', component: ItemDetailsComponent},
+  {path: 'items/edit/:id', component: EditItemComponent}
 ];
 
 @NgModule({

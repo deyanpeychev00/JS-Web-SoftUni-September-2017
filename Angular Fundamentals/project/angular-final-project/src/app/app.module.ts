@@ -15,6 +15,7 @@ import { AuthService } from './services/auth-service/auth.service';
 import {CatalogService} from "./services/catalog-service/catalog.service";
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
 import { LocationsService } from './services/locations-service/locations.service';
+import { EditItemComponent } from './components/edit-item/edit-item.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { LocationsService } from './services/locations-service/locations.service
     ItemComponent,
     AddProductComponent,
     ItemDetailsComponent,
+    EditItemComponent,
   ],
   imports: [
     BrowserModule,

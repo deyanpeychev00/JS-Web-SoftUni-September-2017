@@ -1,0 +1,64 @@
+.leftOne{
+  height: 300px;
+  background-color: #1e88e5;
+}
+.rightOne{
+  height: 300px;
+  background-color: greenyellow;
+}
+
+#itemDetailsMap{
+  height: 300px !important;
+}
+.header-wrapper{
+  margin: 0;
+  background-color: #1e88e5;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.header-wrapper > h1{
+  margin: 0;
+  padding: 10px;
+  color: white;
+}
+
+
+.text-wrapper{
+  margin: 0;
+  background-color: #1e88e5;
+  text-align: center;
+}
+
+.text-wrapper > p{
+  margin: 0;
+  padding: 10px;
+  color: white;
+}
+
+span.tags{
+  color: dodgerblue !important;
+  font-weight: bold;
+  font-style: italic ;
+}
+
+.card{
+  margin: 0;
+  height: 300px !important;
+}
+
+.card-image-min{
+  height: 290px;
+}
+
+.locationsAvailable{
+  font-size: 20px;
+}
+
+.deletebtn{
+  margin-right: 20px;
+}
+
+p.chip{
+  margin-bottom: 8px;
+}

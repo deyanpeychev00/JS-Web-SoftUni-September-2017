@@ -8,4 +8,7 @@ export class RouterAuthService {
   canAccess(){
     return localStorage.getItem('role') !== role;
   }
+  canAccessUser(){
+    return localStorage.getItem('authtoken') !== null;
+  }
 }
