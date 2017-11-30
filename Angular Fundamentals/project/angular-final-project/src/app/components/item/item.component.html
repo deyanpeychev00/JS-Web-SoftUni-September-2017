@@ -21,10 +21,7 @@
       </div>
       <div class="card-action">
         <p *ngIf="permissions">
-          <button type="submit" class="btn btn-primary green details-btn"><a class="white-text" routerLink="#">Details</a></button>
-          <span *ngIf="isAdmin">
-                    <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">delete</i></a>
-          </span>
+          <a class="white-text" routerLink="/items/details/{{item._id}}"><button type="submit" class="btn btn-primary green details-btn">Details</button></a>
         </p>
         <p *ngIf="!permissions">
           <a class="red-text" routerLink="/login">Please log in to see details</a>

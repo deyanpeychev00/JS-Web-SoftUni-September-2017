@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {getCatalog} from "../../../utils/catalog-utils";
+import {CatalogService} from "../../services/catalog-service/catalog.service";
 
 @Component({
   selector: 'app-catalog',
@@ -10,14 +10,15 @@ import {getCatalog} from "../../../utils/catalog-utils";
 export class CatalogComponent implements OnInit {
   catalog;
   permissions: boolean;
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private catalogService: CatalogService) {
     router.events.subscribe((val) => {
       this.permissions = localStorage.getItem('authtoken') !== null;
     });
   }
 
   async ngOnInit() {
-    this.catalog = await getCatalog();
+    this.catalog = await this.catalogService.getCatalog();
     this.permissions = localStorage.getItem('authtoken') !== null;
   }
 }

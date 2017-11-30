@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {register} from "../../../utils/auth";
-import {ToastrService} from "../../toastr.service";
+import {AuthService} from "../../services/auth-service/auth.service";
+import {ToastrService} from "../../services/toastr-service/toastr.service";
 
 @Component({
   selector: 'app-register-page',
@@ -14,7 +14,9 @@ export class RegisterPageComponent implements OnInit {
   password: string;
   repeatedPassword: string;
 
-  constructor(private router: Router, private toastr: ToastrService) {
+  constructor(private router: Router,
+              private toastr: ToastrService,
+              private auth: AuthService) {
   }
 
   ngOnInit() {
@@ -26,7 +28,7 @@ export class RegisterPageComponent implements OnInit {
 
   async submitRegister() {
     this.toastr.toast('Registering..');
-    const res = await register(this.username, this.email, this.password, this.repeatedPassword);
+    const res = await this.auth.register(this.username, this.email, this.password, this.repeatedPassword);
     if(res.error){
       this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
     }else{

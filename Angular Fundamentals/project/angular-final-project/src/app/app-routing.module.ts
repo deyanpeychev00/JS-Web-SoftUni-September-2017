@@ -5,6 +5,7 @@ import {RegisterPageComponent} from "./components/register-page/register-page.co
 import {LoginPageComponent} from "./components/login-page/login-page.component";
 import {CatalogComponent} from "./components/catalog/catalog.component";
 import {AddProductComponent} from "./components/add-product/add-product.component";
+import {ItemDetailsComponent} from "./components/item-details/item-details.component";
 
 
 let homeComponent;
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: 'register', component: RegisterPageComponent},
   {path: 'login', component: LoginPageComponent},
   {path: 'catalog', component: CatalogComponent},
-  {path: 'add-product', component: AddProductComponent}
+  {path: 'add-product', component: AddProductComponent},
+  {path: 'items/details/:id', component: ItemDetailsComponent}
 ];
 
 @NgModule({

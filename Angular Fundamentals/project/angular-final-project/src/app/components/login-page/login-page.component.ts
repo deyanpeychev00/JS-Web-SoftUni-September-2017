@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {login} from "../../../utils/auth";
+
+import {AuthService} from "../../services/auth-service/auth.service";
 import { Router } from '@angular/router';
-import {ToastrService} from "../../toastr.service";
+import {ToastrService} from "../../services/toastr-service/toastr.service";
 
 @Component({
   selector: 'app-login-page',
@@ -14,7 +15,8 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private auth: AuthService) {
   }
 
   ngOnInit() {
@@ -27,12 +29,12 @@ export class LoginPageComponent implements OnInit {
 
   async submitLogin() {
     this.toastr.toast('Logging in..');
-    const res = await login(this.username, this.password);
+    const res = await this.auth.login(this.username, this.password);
     if(res.error){
       this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
     }else{
       if(res.isAdmin){
-        localStorage.setItem('role', res._kmd._id);
+        localStorage.setItem('role', res._id);
       }else{
         localStorage.setItem('role', 'init');
       }

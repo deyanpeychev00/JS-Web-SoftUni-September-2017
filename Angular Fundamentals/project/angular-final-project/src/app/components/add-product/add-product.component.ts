@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {ToastrService} from "../../toastr.service";
-import {RouterAuthService} from "../../router-auth.service";
-import {getLocations, addProduct} from "../../../utils/catalog-utils";
+import {ToastrService} from "../../services/toastr-service/toastr.service";
+import {RouterAuthService} from "../../services/router-auth-service/router-auth.service";
+import {CatalogService} from "../../services/catalog-service/catalog.service";
 
 @Component({
   selector: 'app-add-product',
@@ -19,7 +19,10 @@ export class AddProductComponent implements OnInit {
   locationsObj = {};
   tags;
   imageUrl: string;
-  constructor(private router: Router, private toastr: ToastrService, private routerAuth: RouterAuthService) {
+  constructor(private router: Router,
+              private toastr: ToastrService,
+              private routerAuth: RouterAuthService,
+              private catalogService: CatalogService) {
   }
 
   async ngOnInit() {
@@ -27,7 +30,7 @@ export class AddProductComponent implements OnInit {
       this.router.navigate(['/']);
       this.toastr.errorToast('You don\'t have the right permissions to enter this page.');
     }else{
-      this.locations = await getLocations();
+      this.locations = await this.catalogService.getLocations();
       let locationsNames = [];
 
       this.locations.map(l => {
@@ -39,6 +42,15 @@ export class AddProductComponent implements OnInit {
   }
 
   async submitAddProduct(){
+    if(this.tags === undefined){
+      this.toastr.errorToast('Please specify product categories in the tags field.');
+      return;
+    }
+    if(this.storageLocations === ''){
+      this.toastr.errorToast('Please specify product storage locations in the storage locations field.');
+      return;
+    }
+
     this.tags = this.tags.split(',').map(t=>{
       return t.trim();
     });
@@ -52,7 +64,7 @@ export class AddProductComponent implements OnInit {
       }
     }
 
-    const res = await addProduct(this.name, this.description, this.price, this.quantity, this.imageUrl, this.tags, bodyStorages);
+    const res = await this.catalogService.addProduct(this.name, this.description, this.price, this.quantity, this.imageUrl, this.tags, bodyStorages);
     if(res.error){
       this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
     }else{

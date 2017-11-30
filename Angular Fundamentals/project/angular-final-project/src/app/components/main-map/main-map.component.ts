@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {loadMainMap} from '../../../utils/map-utilities';
+import {LocationsService} from "../../services/locations-service/locations.service";
 
 @Component({
   selector: 'app-main-map',
@@ -7,12 +7,11 @@ import {loadMainMap} from '../../../utils/map-utilities';
   styleUrls: ['./main-map.component.css']
 })
 export class MainMapComponent implements OnInit {
-  mapLoaded: boolean = false;
-  constructor() { }
+  mapLoaded = false;
+  constructor(private locationsService: LocationsService) { }
 
-  ngOnInit() {
-    loadMainMap();
+  async ngOnInit() {
+    await this.locationsService.loadMainMap();
     this.mapLoaded = true;
   }
-
 }
