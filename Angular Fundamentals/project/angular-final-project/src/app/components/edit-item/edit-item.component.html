@@ -1,3 +1,65 @@
-<p>
-  edit-item works!
-</p>
+<div class="header-wrapper">
+  <h1 class="header center white-text text-lighten-2">Edit item</h1>
+</div>
+<div class="text-wrapper">
+  <p><b>Please update the form below:</b></p>
+</div>
+<br/><br/>
+<div class="container">
+  <div class="row" *ngIf="!isPageLoaded">
+    <div class="progress">
+      <div class="indeterminate"></div>
+    </div>
+  </div>
+  <div class="row">
+    <form class="col s12" (ngSubmit)="updateProduct(item._id)">
+      <div class="row">
+        <div class="input-field col s6">
+          <span>Product Name: </span>
+          <input id="name" type="text" class="validate" name="name" [(ngModel)]="name" value="{{item.name}}">
+        </div>
+        <div class="input-field col s6">
+          <span>Quantity: </span>
+          <input name="quantity" id="quantity" type="number" class="validate" [(ngModel)]="quantity" value="{{item.quantity}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <span>Price: </span>
+          <input id="price" type="number" name="price" class="validate" [(ngModel)]="price" value="{{item.price}}">
+        </div>
+        <div class="input-field col s6">
+          <span>Image URL: </span>
+          <input id="imageUrl" type="text" name="imageUrl" class="validate" [(ngModel)]="imageUrl" value="{{item.imageUrl}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <span>Description: </span>
+          <textarea id="description" class="materialize-textarea" name="description" [(ngModel)]="description" value="{{item.description}}" ></textarea>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <p>Storage Locations: </p>
+          <input id="storageLocations" type="text" name="storageLocations" class="validate" [(ngModel)]="availableLocations" value="{{availableLocations}}">
+        </div>
+        <div class="input-field col s4">
+          <p>Tags: </p>
+          <input id="tags" type="text" name="tags" class="validate" [(ngModel)]="tags" placeholder="Write tags, separated with comma" value="{{item.category}}">
+        </div>
+        <div class="input-field col s2 center">
+          <button type="submit" class="btn btn-primary green">Update Product</button>
+          <br/>
+          <br/>
+          <button type="reset" class="btn btn-default grey" (click)="getBack()">Back</button>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <p><b>Note:</b> Invalid locations will not be included. Please check valid locations <a routerLink="/map">here</a>.</p>
+    </div>
+  </div>
+</div>

@@ -50,7 +50,6 @@ export class AddProductComponent implements OnInit {
       this.toastr.errorToast('Please specify product storage locations in the storage locations field.');
       return;
     }
-
     this.tags = this.tags.split(',').map(t=>{
       return t.trim();
     });
@@ -58,9 +57,9 @@ export class AddProductComponent implements OnInit {
       return s.trim();
     });
     const bodyStorages = [];
-    for (const location of this.storageLocations) {
-      if(location !== ''){
-        bodyStorages.push(this.locationsObj[location]);
+    for (const lcn of this.storageLocations) {
+      if(lcn !== ''){
+        bodyStorages.push(this.locationsObj[lcn]);
       }
     }
 
@@ -69,6 +68,7 @@ export class AddProductComponent implements OnInit {
       this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
     }else{
       this.toastr.successToast('Product added.');
+      this.router.navigate(['/catalog']);
     }
   }
 

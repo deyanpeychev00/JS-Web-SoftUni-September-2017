@@ -6,52 +6,62 @@
 </div>
 <br/><br/>
 <div class="container">
-  <div class="row">
-    <div class="col s12 item-wrapper ">
-      <div class="card horizontal hoverable">
-        <div class="card-image" *ngIf="item.imageUrl">
-          <img class="activator card-image-min" src="{{item.imageUrl}}" alt="{{item.name}}">
-        </div>
-        <div class="card-image" *ngIf="!item.imageUrl">
-          <img class="activator card-image-min"
-               src="https://lh3.google.com/u/0/d/1Q8qvS_w_DeskDCxyQIQ8J7MYxF0GtQ97=w1920-h959-iv1" alt="{{item.name}}">
-        </div>
-        <div class="card-stacked">
-          <div class="card-content">
-            <h5><b>{{item.name}}</b></h5>
-            <p class="chip">
-              <b>Description: </b>
-              {{item.description}}
-            </p><br/>
-            <p class="chip">
-              <b>Price: </b>
-              ${{item.price}}
-            </p><br/>
-            <p class="chip">
-              <b>Quantity: </b>
-              {{item.quantity}}
-            </p><br/>
-            <b>Category: </b>
-            <span class="tags" *ngFor="let tag of item.category">
+  <div class="row" *ngIf="!loadedItemDetails">
+    <div class="progress">
+      <div class="indeterminate"></div>
+    </div>
+  </div>
+  <div *ngIf="loadedItemDetails">
+    <div class="row">
+      <div class="col s12 item-wrapper ">
+        <div class="card horizontal hoverable">
+          <div class="card-image" *ngIf="item.imageUrl">
+            <img class="activator card-image-min" src="{{item.imageUrl}}" alt="{{item.name}}">
+          </div>
+          <div class="card-image" *ngIf="!item.imageUrl">
+            <img class="activator card-image-min"
+                 src="https://lh3.google.com/u/0/d/1Q8qvS_w_DeskDCxyQIQ8J7MYxF0GtQ97=w1920-h959-iv1" alt="{{item.name}}">
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+              <h5><b>{{item.name}}</b></h5>
+              <p class="chip">
+                <b>Description: </b>
+                {{item.description}}
+              </p><br/>
+              <p class="chip">
+                <b>Price: </b>
+                ${{item.price}}
+              </p><br/>
+              <p class="chip">
+                <b>Quantity: </b>
+                {{item.quantity}}
+              </p><br/>
+              <b>Category: </b>
+              <span class="tags" *ngFor="let tag of item.category">
           #{{tag}}
         </span>
-          </div>
-          <div class="card-action">
-            <span class="locationsAvailable chip">
+            </div>
+            <div class="card-action">
+            <span class="locationsAvailable chip" *ngIf="item.quantity > 0">
               <b>Our product is available at the current locations: </b>
             </span>
-            <span class="right">
+              <span class="right" *ngIf="item.quantity > 0">
                 <button type="submit" class="btn btn-primary blue details-btn"
                         (click)="orderItem(item._id)">Order</button>
             </span>
-            <span *ngIf="isAdmin" class="right">
+              <span *ngIf="item.quantity <= 0" class="right">
+              <span class="red-text">Out of stock.</span>
+            </span>
+              <span *ngIf="isAdmin" class="right">
               <button type="submit" class="btn btn-primary red details-btn deletebtn" (click)="deleteItem(item._id)">Delete</button>
             </span>
-            <span *ngIf="isAdmin" class="right">
+              <span *ngIf="isAdmin" class="right">
                <a class="white-text" routerLink="/items/edit/{{item._id}}">
               <button type="submit" class="btn btn-primary orange details-btn">Edit</button>
               </a>
             </span>
+            </div>
           </div>
         </div>
       </div>
@@ -63,3 +73,4 @@
     </div>
   </div>
 </div>
+

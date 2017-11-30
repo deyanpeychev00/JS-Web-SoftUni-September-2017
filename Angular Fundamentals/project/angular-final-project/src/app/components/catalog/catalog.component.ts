@@ -18,7 +18,7 @@ export class CatalogComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.catalog = await this.catalogService.getCatalog();
+    this.catalog = (await this.catalogService.getCatalog()).sort( (a, b) => b._kmd.lmt >= a._kmd.lmt);
     this.permissions = localStorage.getItem('authtoken') !== null;
   }
 }

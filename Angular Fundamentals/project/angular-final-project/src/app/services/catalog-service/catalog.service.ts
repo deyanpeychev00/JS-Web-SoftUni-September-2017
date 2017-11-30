@@ -62,4 +62,16 @@ export class CatalogService {
     });
     return await res.json();
   }
+
+  async postUpdateItem(id, obj, authtoken){
+    const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/products/'+id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Kinvey ' + authtoken
+      },
+      body: JSON.stringify(obj)
+    });
+    return await res.json();
+  }
 }

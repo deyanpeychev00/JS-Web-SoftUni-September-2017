@@ -16,6 +16,7 @@ export class ItemDetailsComponent implements OnInit {
     imageUrl: ''
   };
   isAdmin: boolean;
+  loadedItemDetails = false;
 
   constructor(private catalogService: CatalogService,
               private activatedRoute: ActivatedRoute,
@@ -35,13 +36,15 @@ export class ItemDetailsComponent implements OnInit {
         this.itemId = params['id'];
       });
       const res = await this.catalogService.getItemDetails(this.itemId);
-      console.log(res);
       if (res.error) {
         this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
       } else {
+        this.loadedItemDetails = true;
         this.toastr.successToast('Details loaded.');
         this.item = res;
-        this.locationsService.displaySpecificLocations(res.storageLocation);
+        if(res.quantity > 0){
+          this.locationsService.displaySpecificLocations(res.storageLocation);
+        }
       }
     }
   }
