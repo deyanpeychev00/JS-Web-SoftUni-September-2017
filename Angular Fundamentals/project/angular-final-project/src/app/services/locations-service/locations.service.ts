@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import L from 'leaflet';
+import {AdminService} from "../admin/admin.service";
 
 @Injectable()
 export class LocationsService {
 
-  constructor() {
+  constructor(private adminService: AdminService) {
   }
 
   initMap(mapId){
@@ -26,12 +27,13 @@ export class LocationsService {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Kinvey 0ceb0005-c7c7-43cc-bb58-ca65ed1f737a.c/Nmndb374P52RaI8cD3oGFmtz6RKY0mbmubhqa0uV0='
+        'Authorization': 'Basic ' + btoa(`${this.adminService.getAdminCredentials().username}:${this.adminService.getAdminCredentials().password}`)
       }
     });
 
     return await res.json();
   }
+
   async loadMainMap() {
     const mymap = this.initMap('mapid');
     const json = await this.getAllLocations();

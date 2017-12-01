@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
+import {AdminService} from "../admin/admin.service";
 
 @Injectable()
 export class CatalogService {
 
-  constructor() {
+  constructor( private adminService: AdminService) {
   }
 
   async getCatalog() {
@@ -11,7 +12,7 @@ export class CatalogService {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Kinvey 0ceb0005-c7c7-43cc-bb58-ca65ed1f737a.c/Nmndb374P52RaI8cD3oGFmtz6RKY0mbmubhqa0uV0='
+        'Authorization': 'Basic ' + btoa(`${this.adminService.getAdminCredentials().username}:${this.adminService.getAdminCredentials().password}`)
       }
     });
     return await res.json();
@@ -71,6 +72,36 @@ export class CatalogService {
         'Authorization': 'Kinvey ' + authtoken
       },
       body: JSON.stringify(obj)
+    });
+    return await res.json();
+  }
+
+  async updateUserOrders(user, updatedOrders, authtoken){
+    user.orders = updatedOrders;
+    const res = await fetch('https://baas.kinvey.com/user/kid_HJ2sgDXeM/'+user._id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Kinvey ' + authtoken
+      },
+      body: JSON.stringify(user)
+    });
+    return await res.json();
+  }
+
+  async updateOrders(userId, productId, authtoken){
+    const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Kinvey ' + authtoken
+      },
+      body: JSON.stringify({
+        status: 'Awaiting delivery',
+        dateOrdered: (new Date()).toString().substr(0, 15),
+        productOrdered: productId,
+        orderer: userId,
+      })
     });
     return await res.json();
   }

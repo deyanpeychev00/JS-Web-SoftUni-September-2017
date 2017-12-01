@@ -40,5 +40,14 @@ export class AuthService {
     return await res.json();
   }
 
-
+  async getCurrentUser(userId, authtoken){
+    const res = await fetch('https://baas.kinvey.com/user/kid_HJ2sgDXeM/'+userId, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Kinvey ' + authtoken,
+        'Content-Type': 'application/json'
+      },
+    });
+    return await res.json();
+  }
 }

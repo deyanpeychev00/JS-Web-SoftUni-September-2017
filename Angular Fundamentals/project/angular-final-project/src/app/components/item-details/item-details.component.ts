@@ -4,6 +4,7 @@ import {Router, ActivatedRoute, Params} from "@angular/router";
 import {ToastrService} from "../../services/toastr-service/toastr.service";
 import {LocationsService} from "../../services/locations-service/locations.service";
 import {RouterAuthService} from "../../services/router-auth-service/router-auth.service";
+import {AuthService} from "../../services/auth-service/auth.service";
 
 @Component({
   selector: 'app-item-details',
@@ -23,7 +24,8 @@ export class ItemDetailsComponent implements OnInit {
               private toastr: ToastrService,
               private locationsService: LocationsService,
               private router: Router,
-              private routerAuth: RouterAuthService) {
+              private routerAuth: RouterAuthService,
+              private authService: AuthService) {
   }
 
   async ngOnInit() {
@@ -42,7 +44,7 @@ export class ItemDetailsComponent implements OnInit {
         this.loadedItemDetails = true;
         this.toastr.successToast('Details loaded.');
         this.item = res;
-        if(res.quantity > 0){
+        if (res.quantity > 0) {
           this.locationsService.displaySpecificLocations(res.storageLocation);
         }
       }
@@ -50,7 +52,8 @@ export class ItemDetailsComponent implements OnInit {
   }
 
   async deleteItem(id) {
-    const res = await this.catalogService.postDeleteItem(id, localStorage.getItem('authtoken'));
+    const res = await
+    this.catalogService.postDeleteItem(id, localStorage.getItem('authtoken'));
     if (res.error) {
       this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
     } else {
@@ -59,7 +62,29 @@ export class ItemDetailsComponent implements OnInit {
     }
   }
 
-  async orderItem(id){
-    console.log('item ordered');
+  async orderItem(orderId) {
+    let updatedOrders = [];
+    this.toastr.toast('Processing your order..');
+    const user = await this.authService.getCurrentUser(localStorage.getItem('userId'), localStorage.getItem('authtoken'));
+    if (user.error) {
+      this.toastr.errorToast((user.description ? user.description : 'Unknown error occured. Please try again'));
+      return;
+    } else {
+      console.log(user);
+      updatedOrders = user.orders;
+      updatedOrders.push(orderId);
+
+      const res = await this.catalogService.updateUserOrders(user, updatedOrders, localStorage.getItem('authtoken'));
+      if (res.error) {
+        this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
+      } else {
+        const prodUpd = await this.catalogService.updateOrders(localStorage.getItem('userId'), orderId, localStorage.getItem('authtoken'));
+        if(prodUpd.error){
+          this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
+        }else{
+          this.toastr.successToast('Product ordered successfully. Please check your orders.');
+        }
+      }
+    }
   }
 }

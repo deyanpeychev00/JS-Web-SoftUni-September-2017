@@ -16,6 +16,7 @@ import {CatalogService} from "./services/catalog-service/catalog.service";
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
 import { LocationsService } from './services/locations-service/locations.service';
 import { EditItemComponent } from './components/edit-item/edit-item.component';
+import { AdminService } from './services/admin/admin.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { EditItemComponent } from './components/edit-item/edit-item.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [ToastrService, RouterAuthService, AuthService, CatalogService, LocationsService],
+  providers: [ToastrService, RouterAuthService, AuthService, CatalogService, LocationsService, AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
