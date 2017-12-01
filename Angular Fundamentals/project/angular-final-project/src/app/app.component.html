@@ -4,7 +4,7 @@
     <ul class="right nav-ul" *ngIf="logged">
       <li><span class="chip">Welcome, <b>{{username}}</b></span></li>
       <li *ngIf="admin"><a routerLink="/add-product">Add Product</a></li>
-      <li *ngIf="admin"><a routerLink="/manage-orders">Manage Orders</a></li>
+      <li *ngIf="admin"><a routerLink="/orders/manage">Manage Orders</a></li>
       <li><a routerLink="/catalog">Catalog</a></li>
       <li><a routerLink="/my-orders">My Orders</a></li>
       <li><a routerLink="/logout" (click)="logOut()">Log Out</a></li>

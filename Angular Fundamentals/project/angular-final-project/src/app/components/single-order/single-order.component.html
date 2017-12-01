@@ -7,11 +7,19 @@
     <br/>
     <span class="chip">Price: <b>${{order.itemDetails.price}}</b></span>
     <span class="chip">Status: <b>{{order.status}}</b></span>
-    <span *ngIf="order.status !== 'Complete'">
-          <button type="submit" class="btn btn-primary red details-btn deletebtn right" (click)="cancelOrder(order._id)">Cancel Order</button>
+    <span class="chip" *ngIf="canEdit">Ordered from: <b>{{order.ordererUsername}}</b></span>
+    <span *ngIf="!canEdit">
+       <span *ngIf="order.status !== 'Complete'">
+          <button type="submit" class="btn btn-primary red details-btn deletebtn right"
+                  (click)="cancelOrder(order._id)">Cancel Order</button>
     </span>
     <span *ngIf="order.status === 'Complete'">
-          <button type="submit" class="btn btn-primary blue details-btn deletebtn right" (click)="cancelOrder(order._id)">Remove Order from List</button>
+          <button type="submit" class="btn btn-primary blue details-btn deletebtn right"
+                  (click)="cancelOrder(order._id)">Remove Order from List</button>
+    </span>
+    </span>
+    <span *ngIf="canEdit">
+      <button type="submit" class="btn btn-primary orange details-btn deletebtn right"><a class="white-text" routerLink="/orders/edit/{{order._id}}">Edit Order status</a></button>
     </span>
   </div>
 </li>

@@ -1,8 +1,8 @@
 <div class="header-wrapper">
-  <h1 class="header center white-text text-lighten-2">My orders</h1>
+  <h1 class="header center white-text text-lighten-2">Manage orders</h1>
 </div>
 <div class="text-wrapper">
-  <p><b>Check your orders here:</b></p>
+  <p><b>Change orders' statuses here:</b></p>
 </div>
 <div class="container">
   <div class="row" *ngIf="!isPageLoaded">
@@ -11,9 +11,9 @@
     </div>
   </div>
   <div class="row" *ngIf="isPageLoaded && myOrders.length === 0 ">
-      <p class="red-text center">You haven't ordered anything yet. Please check our <a routerLink="/catalog">catalog</a> and make your first order.</p>
+    <p class="red-text center">No orders available.</p>
   </div>
   <ul class="collection" *ngFor="let order of myOrders">
-    <app-single-order [order]="order"></app-single-order>
+    <app-single-order [order]="order" [canEdit]="true"></app-single-order>
   </ul>
 </div>

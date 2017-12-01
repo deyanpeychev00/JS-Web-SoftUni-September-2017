@@ -19,6 +19,8 @@ import { EditItemComponent } from './components/edit-item/edit-item.component';
 import { AdminService } from './services/admin/admin.service';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { SingleOrderComponent } from './components/single-order/single-order.component';
+import { ManageOrdersComponent } from './components/manage-orders/manage-orders.component';
+import { ChangeOrderStatusComponent } from './components/change-order-status/change-order-status.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { SingleOrderComponent } from './components/single-order/single-order.com
     EditItemComponent,
     MyOrdersComponent,
     SingleOrderComponent,
+    ManageOrdersComponent,
+    ChangeOrderStatusComponent,
   ],
   imports: [
     BrowserModule,

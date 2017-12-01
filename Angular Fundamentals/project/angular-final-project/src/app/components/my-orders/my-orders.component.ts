@@ -9,6 +9,7 @@ import {ToastrService} from "../../services/toastr-service/toastr.service";
 })
 export class MyOrdersComponent implements OnInit {
   myOrders;
+  isPageLoaded = false;
   constructor(private catalogService: CatalogService,
               private toastr: ToastrService) {
   }
@@ -18,8 +19,11 @@ export class MyOrdersComponent implements OnInit {
     if (orders.error) {
       this.toastr.errorToast((orders.description ? orders.description : 'Unknown error occured. Please try again'));
     }else{
+      this.isPageLoaded = true;
       this.myOrders = orders;
-      this.toastr.successToast('Orders loading complete.');
+      if(this.myOrders.length > 0){
+        this.toastr.successToast('Orders loading complete.');
+      }
     }
   }
 

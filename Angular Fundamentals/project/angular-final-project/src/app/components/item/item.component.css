@@ -1,10 +1,16 @@
 .item-wrapper{
-  height: 350px;
+  height: 350px !important;
+  margin-bottom: 20px;
 }
 
 .card-image-min{
-  height: 306px;
+  height: 306px !important;
 }
+
+.card-image{
+  height: 306px !important;
+}
+
 .align-content-center{
   text-align: center;
 }

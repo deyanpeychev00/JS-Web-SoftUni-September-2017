@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 })
 export class SingleOrderComponent implements OnInit {
   @Input() order;
+  @Input() canEdit;
   constructor(
     private catalogService: CatalogService,
     private toastr: ToastrService,
@@ -22,7 +23,7 @@ export class SingleOrderComponent implements OnInit {
   }
 
   async cancelOrder(orderId){
-    this.toastr.toast('Canceling order..');
+    this.toastr.toast('Removing order..');
     const removedOrder = await this.catalogService.removeOrder(orderId, localStorage.getItem('authtoken'));
     if (removedOrder.error) {
       this.toastr.errorToast((removedOrder.description ? removedOrder.description : 'Unknown error occured. Please try again'));
