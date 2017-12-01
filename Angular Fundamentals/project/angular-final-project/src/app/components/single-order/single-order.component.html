@@ -1,0 +1,17 @@
+<li class="collection-item avatar">
+  <div class="image-holder">
+    <img src="{{order.itemDetails.imageUrl}}" alt="Order image" class="circle">
+  </div>
+  <div class="info-holder">
+    <span class="title"><b>{{order.itemDetails.name}}</b></span>
+    <br/>
+    <span class="chip">Price: <b>${{order.itemDetails.price}}</b></span>
+    <span class="chip">Status: <b>{{order.status}}</b></span>
+    <span *ngIf="order.status !== 'Complete'">
+          <button type="submit" class="btn btn-primary red details-btn deletebtn right" (click)="cancelOrder(order._id)">Cancel Order</button>
+    </span>
+    <span *ngIf="order.status === 'Complete'">
+          <button type="submit" class="btn btn-primary blue details-btn deletebtn right" (click)="cancelOrder(order._id)">Remove Order from List</button>
+    </span>
+  </div>
+</li>

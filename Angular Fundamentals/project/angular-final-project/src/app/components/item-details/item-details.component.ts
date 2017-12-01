@@ -77,11 +77,22 @@ export class ItemDetailsComponent implements OnInit {
       if (res.error) {
         this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
       } else {
-        const prodUpd = await this.catalogService.updateOrders(localStorage.getItem('userId'), orderId, localStorage.getItem('authtoken'));
+        const prodUpd = await this.catalogService.updateOrders(this.item, localStorage.getItem('userId'), orderId, localStorage.getItem('authtoken'));
         if(prodUpd.error){
-          this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
+          this.toastr.errorToast((prodUpd.description ? prodUpd.description : 'Unknown error occured. Please try again'));
         }else{
-          this.toastr.successToast('Product ordered successfully. Please check your orders.');
+          const item = await this.catalogService.getItemDetails(orderId);
+          if(item.error){
+            this.toastr.errorToast((item.description ? item.description : 'Unknown error occured. Please try again'));
+          }else{
+            item.quantity = item.quantity-1;
+            const updateItem = await this.catalogService.postUpdateItem(orderId, item, localStorage.getItem('authtoken'));
+            if(updateItem.error){
+              this.toastr.errorToast((updateItem.description ? updateItem.description : 'Unknown error occured. Please try again'));
+            }else{
+              this.toastr.successToast('Product ordered successfully. Please check your orders.');
+            }
+          }
         }
       }
     }

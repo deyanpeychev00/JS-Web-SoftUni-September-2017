@@ -17,6 +17,8 @@ import { ItemDetailsComponent } from './components/item-details/item-details.com
 import { LocationsService } from './services/locations-service/locations.service';
 import { EditItemComponent } from './components/edit-item/edit-item.component';
 import { AdminService } from './services/admin/admin.service';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { SingleOrderComponent } from './components/single-order/single-order.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { AdminService } from './services/admin/admin.service';
     AddProductComponent,
     ItemDetailsComponent,
     EditItemComponent,
+    MyOrdersComponent,
+    SingleOrderComponent,
   ],
   imports: [
     BrowserModule,

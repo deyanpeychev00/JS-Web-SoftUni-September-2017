@@ -76,6 +76,17 @@ export class CatalogService {
     return await res.json();
   }
 
+  async getMyOrders(userId, authtoken){
+    const res = await fetch(`https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders/?query={"orderer":"${userId}"}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Kinvey ' + authtoken
+      },
+    });
+    return await res.json();
+  }
+
   async updateUserOrders(user, updatedOrders, authtoken){
     user.orders = updatedOrders;
     const res = await fetch('https://baas.kinvey.com/user/kid_HJ2sgDXeM/'+user._id, {
@@ -89,7 +100,7 @@ export class CatalogService {
     return await res.json();
   }
 
-  async updateOrders(userId, productId, authtoken){
+  async updateOrders(item, userId, productId, authtoken){
     const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders', {
       method: 'POST',
       headers: {
@@ -101,7 +112,34 @@ export class CatalogService {
         dateOrdered: (new Date()).toString().substr(0, 15),
         productOrdered: productId,
         orderer: userId,
+        itemDetails: {
+          name: item.name,
+          price: item.price,
+          imageUrl: item.imageUrl
+        }
       })
+    });
+    return await res.json();
+  }
+
+  async removeOrder(id, authtoken){
+    const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders/' + id, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': 'Kinvey ' + authtoken
+      }
+    });
+    return await res.json();
+  }
+
+  async removeOrderFromUserList(user, authtoken){
+    const res = await fetch('https://baas.kinvey.com/user/kid_HJ2sgDXeM/'+user._id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Kinvey ' + authtoken
+      },
+      body: JSON.stringify(user)
     });
     return await res.json();
   }
