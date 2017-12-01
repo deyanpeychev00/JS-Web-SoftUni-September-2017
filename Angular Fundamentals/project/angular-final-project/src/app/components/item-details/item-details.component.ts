@@ -70,7 +70,6 @@ export class ItemDetailsComponent implements OnInit {
       this.toastr.errorToast((user.description ? user.description : 'Unknown error occured. Please try again'));
       return;
     } else {
-      console.log(user);
       updatedOrders = user.orders;
       updatedOrders.push(orderId);
 
