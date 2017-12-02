@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col s12 m6">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span class="card-title"><b>{{article?.title}}</b></span>
+        <img *ngIf="displayImage" src="{{article?.link}}" alt="img">
+        <br/>
+        <br/>
+        <span class="chip">
+          <img src="http://materializecss.com/images/yuna.jpg" alt="Contact Person">
+          {{article?.author}}
+        </span>
+        <p>{{trunc(article?.text)}}</p>
+      </div>
+      <div class="card-action">
+        <button class="waves-effect waves-light btn orange" *ngIf="displayImage" (click)="hideImage()">Hide Image</button>
+        <button class="waves-effect waves-light btn" *ngIf="!displayImage" (click)="showImage()">Show Image</button>
+        <button class="waves-effect waves-light btn" *ngIf="!hideAll" (click)="readMore()">Read More</button>
+        <button class="waves-effect waves-light btn orange" *ngIf="hideAll" (click)="hideText()">Hide All</button>
+        <button class="waves-effect waves-light btn red" (click)="deleteArticle(article.id)">Delete</button>
+        <br/>
+        <br/>
+        <button class="waves-effect waves-light btn blue" *ngIf="hidePartial" (click)="hideText()">Hide Current Content</button>
+      </div>
+    </div>
+  </div>
+</div>

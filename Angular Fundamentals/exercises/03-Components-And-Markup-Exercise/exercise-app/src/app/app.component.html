@@ -1,0 +1,28 @@
+<div class="header-wrapper">
+  <h1 class="header-app">Angular Fundamentals</h1>
+</div>
+<div class="text-wrapper">
+  <p>Components and Markup | Exercise | Deyan Peychev</p>
+</div>
+<br/>
+<br/>
+<div class="container">
+  <div class="col-md-6 left">
+    <div class="collection">
+      <note-headers (selection)="showDetails($event)" *ngFor="let article of data" [incomingArticle]="article"></note-headers>
+    </div>
+  </div>
+  <div class="col-md-6 right" *ngIf="gotSelectedArticle">
+    <note-article (deleteArticleEmitter)="deleteTargetArticle($event)" [article]="selectedArticle"></note-article>
+  </div>
+  <div class="col-md-6 right" *ngIf="!gotSelectedArticle">
+    <div class="row">
+      <div class="col s12 m5">
+        <div class="card-panel teal">
+          <span class="white-text">You have not selected any articles. Please select an article from the list to display its info.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

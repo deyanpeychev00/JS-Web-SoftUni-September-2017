@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+}
+
+.header-wrapper{
+  background-color: cornflowerblue;
+  color:white;
+  margin: 0;
+  text-align: center;
+}
+
+.header-wrapper > h1.header-app{
+  margin: 0;
+  padding: 10px;
+}
+
+.text-wrapper{
+  background-color: cornflowerblue;
+  color:white;
+  margin: 0;
+  text-align: center;
+}
+
+.text-wrapper > p{
+  margin: 0;
+  padding: 10px;
+}
