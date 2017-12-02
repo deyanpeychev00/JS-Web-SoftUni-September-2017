@@ -1,0 +1,7 @@
+<h1>All books:</h1>
+<p>Choose a book</p>
+<ul>
+  <li *ngFor="let book of books">
+    <div><b>{{book.title}}</b>: ${{book.price}} | <b>Author: </b>{{book.author}} | {{book.publishedOn | date: 'longDate'}}</div>
+  </li>
+</ul>
