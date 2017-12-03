@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {AdminService} from "../admin/admin.service";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class CatalogService {
 
-  constructor( private adminService: AdminService) {
+  constructor(private adminService: AdminService, private http: HttpClient) {
   }
 
   async getCatalog() {
@@ -18,29 +20,19 @@ export class CatalogService {
     return await res.json();
   }
 
-  async getLocations() {
-    const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/locations', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Kinvey ' + localStorage.getItem('authtoken')
-      }
+  getLocations(): Observable<any> {
+    return this.http.get('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/locations', {
+      headers: new HttpHeaders().set('Authorization', 'Kinvey ' + localStorage.getItem('authtoken'))
+        .set('Content-Type', 'application/json')
     });
-    return await res.json();
   }
 
-  async addProduct(name, description, price, quantity, imageUrl, category, storageLocation) {
-    const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/products', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Kinvey ' + localStorage.getItem('authtoken')
-      },
-      body: JSON.stringify({
-        name, description, price, quantity, imageUrl, category, storageLocation
-      })
+  addProduct(name, description, price, quantity, imageUrl, category, storageLocation): Observable<any> {
+    const body = JSON.stringify({name, description, price, quantity, imageUrl, category, storageLocation});
+    return this.http.post('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/products', body, {
+      headers: new HttpHeaders().set('Authorization', 'Kinvey ' + localStorage.getItem('authtoken'))
+        .set('Content-Type', 'application/json')
     });
-    return await res.json();
   }
 
   async postDeleteItem(id, authtoken) {
@@ -54,7 +46,7 @@ export class CatalogService {
   }
 
   async getItemDetails(id) {
-    const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/products/'+id, {
+    const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/products/' + id, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -64,8 +56,8 @@ export class CatalogService {
     return await res.json();
   }
 
-  async postUpdateItem(id, obj, authtoken){
-    const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/products/'+id, {
+  async postUpdateItem(id, obj, authtoken) {
+    const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/products/' + id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -76,18 +68,14 @@ export class CatalogService {
     return await res.json();
   }
 
-  async getMyOrders(userId, authtoken){
-    const res = await fetch(`https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders/?query={"orderer":"${userId}"}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Kinvey ' + authtoken
-      },
+  getMyOrders(userId, authtoken): Observable<any> {
+    return this.http.get(`https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders/?query={"orderer":"${userId}"}`, {
+      headers: new HttpHeaders().set('Authorization', 'Kinvey ' + authtoken)
+        .set('Content-Type', 'application/json')
     });
-    return await res.json();
   }
 
-  async getAllOrders(authtoken){
+  async getAllOrders(authtoken) {
     const res = await fetch(`https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders`, {
       method: 'GET',
       headers: {
@@ -98,9 +86,9 @@ export class CatalogService {
     return await res.json();
   }
 
-  async updateUserOrders(user, updatedOrders, authtoken){
+  async updateUserOrders(user, updatedOrders, authtoken) {
     user.orders = updatedOrders;
-    const res = await fetch('https://baas.kinvey.com/user/kid_HJ2sgDXeM/'+user._id, {
+    const res = await fetch('https://baas.kinvey.com/user/kid_HJ2sgDXeM/' + user._id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -111,7 +99,7 @@ export class CatalogService {
     return await res.json();
   }
 
-  async updateOrders(item, userId, productId, authtoken, username){
+  async updateOrders(item, userId, productId, authtoken, username) {
     const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders', {
       method: 'POST',
       headers: {
@@ -134,7 +122,7 @@ export class CatalogService {
     return await res.json();
   }
 
-  async removeOrder(id, authtoken){
+  async removeOrder(id, authtoken) {
     const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders/' + id, {
       method: 'DELETE',
       headers: {
@@ -144,8 +132,8 @@ export class CatalogService {
     return await res.json();
   }
 
-  async removeOrderFromUserList(user, authtoken){
-    const res = await fetch('https://baas.kinvey.com/user/kid_HJ2sgDXeM/'+user._id, {
+  async removeOrderFromUserList(user, authtoken) {
+    const res = await fetch('https://baas.kinvey.com/user/kid_HJ2sgDXeM/' + user._id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -156,7 +144,7 @@ export class CatalogService {
     return await res.json();
   }
 
-  async getSingleOrder(orderId, authtoken){
+  async getSingleOrder(orderId, authtoken) {
     const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders/' + orderId, {
       method: 'GET',
       headers: {
@@ -166,7 +154,7 @@ export class CatalogService {
     return await res.json();
   }
 
-  async updateOrderStatus(order, authtoken){
+  async updateOrderStatus(order, authtoken) {
     const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders/' + order._id, {
       method: 'PUT',
       headers: {

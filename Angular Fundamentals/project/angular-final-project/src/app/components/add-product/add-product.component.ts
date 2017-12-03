@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ToastrService} from "../../services/toastr-service/toastr.service";
 import {RouterAuthService} from "../../services/router-auth-service/router-auth.service";
@@ -19,57 +19,62 @@ export class AddProductComponent implements OnInit {
   locationsObj = {};
   tags;
   imageUrl: string;
+
   constructor(private router: Router,
               private toastr: ToastrService,
               private routerAuth: RouterAuthService,
               private catalogService: CatalogService) {
   }
 
-  async ngOnInit() {
-    if(!this.routerAuth.canAccess()){
+  ngOnInit() {
+    if (!this.routerAuth.canAccess()) {
       this.router.navigate(['/']);
       this.toastr.errorToast('You don\'t have the right permissions to enter this page.');
-    }else{
-      this.locations = await this.catalogService.getLocations();
-      let locationsNames = [];
-
-      this.locations.map(l => {
-        locationsNames.push(l.name);
-        this.locationsObj[l.name] = l._id;
+    } else {
+      const locationsNames = [];
+      this.catalogService.getLocations().subscribe(data => {
+        this.locations = data;
+        this.locations.map(l => {
+          locationsNames.push(l.name);
+          this.locationsObj[l.name] = l._id;
+        });
+        this.storageLocations = locationsNames.join(', ');
       });
-      this.storageLocations = locationsNames.join(', ');
     }
   }
 
-  async submitAddProduct(){
-    if(this.tags === undefined){
+  async submitAddProduct() {
+    if (this.tags === undefined) {
       this.toastr.errorToast('Please specify product categories in the tags field.');
       return;
     }
-    if(this.storageLocations === ''){
+    if (this.storageLocations === '') {
       this.toastr.errorToast('Please specify product storage locations in the storage locations field.');
       return;
     }
-    this.tags = this.tags.split(',').map(t=>{
-      return t.trim();
+    this.tags = this.tags.split(',').map(t => {
+      if (t !== ' ' || t !== '') {
+        return t.trim();
+      }
     });
-    this.storageLocations = this.storageLocations.split(',').map(s=>{
+    this.storageLocations = this.storageLocations.split(',').map(s => {
       return s.trim();
     });
     const bodyStorages = [];
     for (const lcn of this.storageLocations) {
-      if(lcn !== ''){
+      if (lcn !== '') {
         bodyStorages.push(this.locationsObj[lcn]);
       }
     }
 
-    const res = await this.catalogService.addProduct(this.name, this.description, this.price, this.quantity, this.imageUrl, this.tags, bodyStorages);
-    if(res.error){
-      this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
-    }else{
-      this.toastr.successToast('Product added.');
-      this.router.navigate(['/catalog']);
-    }
+    this.catalogService.addProduct(this.name, this.description, this.price, this.quantity, this.imageUrl, this.tags, bodyStorages).subscribe(data => {
+        this.toastr.successToast('Product added.');
+        this.router.navigate(['/catalog']);
+      },
+      err => {
+        this.toastr.errorToast((err.error.description ? err.error.description : 'Unknown error occured. Please try again'));
+      });
+
   }
 
   getBack() {
