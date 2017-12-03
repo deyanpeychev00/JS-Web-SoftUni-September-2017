@@ -9,15 +9,11 @@ export class CatalogService {
   constructor(private adminService: AdminService, private http: HttpClient) {
   }
 
-  async getCatalog() {
-    const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/products', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa(`${this.adminService.getAdminCredentials().username}:${this.adminService.getAdminCredentials().password}`)
-      }
+  getCatalog():Observable<any> {
+    return this.http.get('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/products', {
+      headers: new HttpHeaders().set('Authorization', 'Basic ' + btoa(`${this.adminService.getAdminCredentials().username}:${this.adminService.getAdminCredentials().password}`))
+        .set('Content-Type', 'application/json')
     });
-    return await res.json();
   }
 
   getLocations(): Observable<any> {
@@ -75,15 +71,11 @@ export class CatalogService {
     });
   }
 
-  async getAllOrders(authtoken) {
-    const res = await fetch(`https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Kinvey ' + authtoken
-      },
+  getAllOrders(authtoken): Observable<any> {
+    return this.http.get(`https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders`, {
+      headers: new HttpHeaders().set('Authorization', 'Kinvey ' + authtoken)
+        .set('Content-Type', 'application/json')
     });
-    return await res.json();
   }
 
   async updateUserOrders(user, updatedOrders, authtoken) {
