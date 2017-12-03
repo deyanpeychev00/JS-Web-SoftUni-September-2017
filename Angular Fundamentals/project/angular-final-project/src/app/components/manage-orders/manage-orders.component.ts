@@ -19,7 +19,7 @@ export class ManageOrdersComponent implements OnInit {
               private routerAuth: RouterAuthService) {
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     if (!this.routerAuth.canAccess()) {
       this.router.navigate(['/']);
       this.toastr.errorToast('You don\'t have the right permissions to enter this page.');

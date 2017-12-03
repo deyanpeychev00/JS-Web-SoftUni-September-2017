@@ -76,7 +76,7 @@ export class EditItemComponent implements OnInit {
     }
   }
 
-  async updateProduct(productId) {
+  updateProduct(productId) {
     if (typeof this.tags === 'string') {
       this.tags = this.tags.split(',').map(t => {
         return t.trim();

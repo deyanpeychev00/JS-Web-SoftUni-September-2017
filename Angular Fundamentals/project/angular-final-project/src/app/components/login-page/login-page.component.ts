@@ -26,7 +26,7 @@ export class LoginPageComponent implements OnInit {
     window.history.back();
   }
 
-  async submitLogin() {
+  submitLogin() {
     this.toastr.toast('Logging in..');
     this.auth.login(this.username, this.password).subscribe(data => {
         if (data.isAdmin) {

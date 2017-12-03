@@ -43,7 +43,7 @@ export class AddProductComponent implements OnInit {
     }
   }
 
-  async submitAddProduct() {
+  submitAddProduct() {
     if (this.tags === undefined) {
       this.toastr.errorToast('Please specify product categories in the tags field.');
       return;

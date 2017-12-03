@@ -15,7 +15,7 @@ export class MyOrdersComponent implements OnInit {
               private toastr: ToastrService) {
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.catalogService.getMyOrders(localStorage.getItem('userId'), localStorage.getItem('authtoken')).subscribe(data => {
         this.isPageLoaded = true;
         this.myOrders = data;
