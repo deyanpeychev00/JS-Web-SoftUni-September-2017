@@ -26,22 +26,29 @@ export class RegisterPageComponent implements OnInit {
     window.history.back();
   }
 
-  async submitRegister() {
-    this.toastr.toast('Registering..');
-    const res = await this.auth.register(this.username, this.email, this.password, this.repeatedPassword);
-    if(res.error){
-      this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
-    }else{
-      if (res.isAdmin) {
-        localStorage.setItem('role', res._kmd._id);
-      } else {
-        localStorage.setItem('role', 'init');
-      }
-      this.toastr.successToast('Successful registration.');
-      localStorage.setItem('authtoken', res._kmd.authtoken);
-      localStorage.setItem('username', res.username);
-      localStorage.setItem('userId', res._id);
-      this.router.navigate(['/catalog']);
+  submitRegister() {
+    const message = this.auth.validateRegisterForm(this.username, this.email, this.password, this.repeatedPassword);
+    if(!message.success){
+      this.toastr.errorToast(message.error);
+      return;
     }
+    this.toastr.toast('Registering..');
+    this.auth.register(this.username, this.email, this.password).subscribe(
+      data => {
+        if (data.isAdmin) {
+          localStorage.setItem('role', data._kmd._id);
+        } else {
+          localStorage.setItem('role', 'init');
+        }
+        this.toastr.successToast('Successful registration.');
+        localStorage.setItem('authtoken', data._kmd.authtoken);
+        localStorage.setItem('username', data.username);
+        localStorage.setItem('userId', data._id);
+        this.router.navigate(['/catalog']);
+      },
+      err => {
+        this.toastr.errorToast((err.error.description ? err.error.description : 'Unknown error occured. Please try again'));
+      }
+    );
   }
 }

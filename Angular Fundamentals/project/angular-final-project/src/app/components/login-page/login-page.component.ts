@@ -28,7 +28,7 @@ export class LoginPageComponent implements OnInit {
 
   async submitLogin() {
     this.toastr.toast('Logging in..');
-    this.auth.loginObs(this.username, this.password).subscribe(data => {
+    this.auth.login(this.username, this.password).subscribe(data => {
         if (data.isAdmin) {
           localStorage.setItem('role', data._id);
         } else {
