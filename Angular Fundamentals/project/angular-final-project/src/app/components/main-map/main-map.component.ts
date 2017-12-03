@@ -10,8 +10,8 @@ export class MainMapComponent implements OnInit {
   mapLoaded = false;
   constructor(private locationsService: LocationsService) { }
 
-  async ngOnInit() {
-    await this.locationsService.loadMainMap();
+  ngOnInit() {
+    this.locationsService.loadMainMap();
     this.mapLoaded = true;
   }
 }

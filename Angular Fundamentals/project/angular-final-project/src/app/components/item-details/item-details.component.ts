@@ -37,6 +37,7 @@ export class ItemDetailsComponent implements OnInit {
       this.activatedRoute.params.subscribe((params: Params) => {
         this.itemId = params['id'];
       });
+
       const res = await this.catalogService.getItemDetails(this.itemId);
       if (res.error) {
         this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
