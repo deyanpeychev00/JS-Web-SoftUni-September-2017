@@ -9,7 +9,7 @@ export class CatalogService {
   constructor(private adminService: AdminService, private http: HttpClient) {
   }
 
-  getCatalog():Observable<any> {
+  getCatalog(): Observable<any> {
     return this.http.get('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/products', {
       headers: new HttpHeaders().set('Authorization', 'Basic ' + btoa(`${this.adminService.getAdminCredentials().username}:${this.adminService.getAdminCredentials().password}`))
         .set('Content-Type', 'application/json')
@@ -31,37 +31,24 @@ export class CatalogService {
     });
   }
 
-  async postDeleteItem(id, authtoken) {
-    const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/products/' + id, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': 'Kinvey ' + authtoken
-      }
+  postDeleteItem(id, authtoken): Observable<any> {
+    return this.http.delete(`https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/products/${id}`, {
+      headers: new HttpHeaders().set('Authorization', 'Kinvey ' + authtoken)
     });
-    return await res.json();
   }
 
-  async getItemDetails(id) {
-    const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/products/' + id, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Kinvey ' + localStorage.getItem('authtoken')
-      }
+  getItemDetails(id): Observable<any> {
+    return this.http.get('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/products/' + id, {
+      headers: new HttpHeaders().set('Authorization', 'Kinvey ' + localStorage.getItem('authtoken'))
+        .set('Content-Type', 'application/json')
     });
-    return await res.json();
   }
 
-  async postUpdateItem(id, obj, authtoken) {
-    const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/products/' + id, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Kinvey ' + authtoken
-      },
-      body: JSON.stringify(obj)
+  postUpdateItem(id, obj, authtoken): Observable<any> {
+    return this.http.put('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/products/' + id, JSON.stringify(obj), {
+      headers: new HttpHeaders().set('Authorization', 'Kinvey ' + authtoken)
+        .set('Content-Type', 'application/json')
     });
-    return await res.json();
   }
 
   getMyOrders(userId, authtoken): Observable<any> {
@@ -78,83 +65,57 @@ export class CatalogService {
     });
   }
 
-  async updateUserOrders(user, updatedOrders, authtoken) {
+  updateUserOrders(user, updatedOrders, authtoken): Observable<any> {
     user.orders = updatedOrders;
-    const res = await fetch('https://baas.kinvey.com/user/kid_HJ2sgDXeM/' + user._id, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Kinvey ' + authtoken
+    return this.http.put('https://baas.kinvey.com/user/kid_HJ2sgDXeM/' + user._id, JSON.stringify(user), {
+      headers: new HttpHeaders().set('Authorization', 'Kinvey ' + authtoken)
+        .set('Content-Type', 'application/json')
+    });
+  }
+
+  updateOrders(item, userId, productId, authtoken, username): Observable<any> {
+    const body = JSON.stringify({
+      status: 'Awaiting delivery',
+      dateOrdered: (new Date()).toString().substr(0, 15),
+      productOrdered: productId,
+      orderer: userId,
+      itemDetails: {
+        name: item.name,
+        price: item.price,
+        imageUrl: item.imageUrl
       },
-      body: JSON.stringify(user)
+      ordererUsername: username
     });
-    return await res.json();
+    return this.http.post('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders', body, {
+      headers: new HttpHeaders().set('Authorization', 'Kinvey ' + authtoken)
+        .set('Content-Type', 'application/json')
+    });
   }
 
-  async updateOrders(item, userId, productId, authtoken, username) {
-    const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Kinvey ' + authtoken
-      },
-      body: JSON.stringify({
-        status: 'Awaiting delivery',
-        dateOrdered: (new Date()).toString().substr(0, 15),
-        productOrdered: productId,
-        orderer: userId,
-        itemDetails: {
-          name: item.name,
-          price: item.price,
-          imageUrl: item.imageUrl
-        },
-        ordererUsername: username
-      })
+  removeOrder(id, authtoken): Observable<any> {
+    return this.http.delete('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders/' + id, {
+      headers: new HttpHeaders().set('Authorization', 'Kinvey ' + authtoken)
     });
-    return await res.json();
   }
 
-  async removeOrder(id, authtoken) {
-    const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders/' + id, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': 'Kinvey ' + authtoken
-      }
+  removeOrderFromUserList(user, authtoken): Observable<any> {
+    return this.http.put('https://baas.kinvey.com/user/kid_HJ2sgDXeM/' + user._id,JSON.stringify(user),{
+      headers: new HttpHeaders().set('Authorization', 'Kinvey ' + authtoken)
+        .set('Content-Type', 'application/json')
     });
-    return await res.json();
   }
 
-  async removeOrderFromUserList(user, authtoken) {
-    const res = await fetch('https://baas.kinvey.com/user/kid_HJ2sgDXeM/' + user._id, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Kinvey ' + authtoken
-      },
-      body: JSON.stringify(user)
+  getSingleOrder(orderId, authtoken) : Observable<any>{
+    return this.http.get('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders/' + orderId, {
+      headers: new HttpHeaders().set('Authorization', 'Kinvey ' + authtoken)
+        .set('Content-Type', 'application/json')
     });
-    return await res.json();
   }
 
-  async getSingleOrder(orderId, authtoken) {
-    const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders/' + orderId, {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Kinvey ' + authtoken
-      }
+  updateOrderStatus(order, authtoken): Observable<any> {
+    return this.http.put('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders/' + order._id, JSON.stringify(order), {
+      headers: new HttpHeaders().set('Authorization', 'Kinvey ' + authtoken)
+        .set('Content-Type', 'application/json')
     });
-    return await res.json();
-  }
-
-  async updateOrderStatus(order, authtoken) {
-    const res = await fetch('https://baas.kinvey.com/appdata/kid_HJ2sgDXeM/orders/' + order._id, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Kinvey ' + authtoken
-      },
-      body: JSON.stringify(order)
-    });
-    return await res.json();
   }
 }

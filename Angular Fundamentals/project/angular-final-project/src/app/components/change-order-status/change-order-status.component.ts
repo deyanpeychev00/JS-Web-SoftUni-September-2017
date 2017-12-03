@@ -22,7 +22,7 @@ export class ChangeOrderStatusComponent implements OnInit {
               private activatedRoute: ActivatedRoute) {
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     if (!this.routerAuth.canAccess()) {
       this.router.navigate(['/']);
       this.toastr.errorToast('You don\'t have the right permissions to enter this page.');
@@ -30,18 +30,18 @@ export class ChangeOrderStatusComponent implements OnInit {
       this.activatedRoute.params.subscribe((params: Params) => {
         this.orderId = params['id'];
       });
-      const order = await this.catalogService.getSingleOrder(this.orderId, localStorage.getItem('authtoken'));
-      if(order.error){
-        this.toastr.errorToast((order.description ? order.description : 'Unknown error occured. Please try again'));
-      }else{
+      this.catalogService.getSingleOrder(this.orderId, localStorage.getItem('authtoken')).subscribe(data => {
         this.toastr.successToast('Order details loaded.');
-        this.orderToChange = order;
+        this.orderToChange = data;
         this.newOrderStatus = this.orderToChange.status;
-      }
+      },
+        err => {
+          this.toastr.errorToast((err.error.description ? err.error.description : 'Unknown error occured. Please try again'));
+        });
     }
   }
 
-  async updateStatus(){
+  updateStatus(){
     this.orderToChange.status = this.newOrderStatus;
     if(this.orderToChange.status === '' || this.orderToChange.status === undefined || this.orderToChange.status === null){
       this.toastr.errorToast('Please enter order status.');
@@ -51,13 +51,13 @@ export class ChangeOrderStatusComponent implements OnInit {
       this.toastr.errorToast('Please enter a valid order status.');
       return;
     }
-    const updateStatus = await this.catalogService.updateOrderStatus(this.orderToChange, localStorage.getItem('authtoken'));
-    if(updateStatus.error){
-      this.toastr.errorToast((updateStatus.description ? updateStatus.description : 'Unknown error occured. Please try again'));
-    }else{
+    this.catalogService.updateOrderStatus(this.orderToChange, localStorage.getItem('authtoken')).subscribe(data => {
       this.toastr.successToast('Order status changed successfully.');
       this.router.navigate(['/orders/manage']);
-    }
+    },
+      err => {
+        this.toastr.errorToast((err.error.description ? err.error.description : 'Unknown error occured. Please try again'));
+      });
   }
 
 }

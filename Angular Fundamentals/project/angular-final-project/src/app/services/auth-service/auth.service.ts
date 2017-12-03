@@ -57,14 +57,10 @@ export class AuthService {
     });
   }
 
-  async getCurrentUser(userId, authtoken) {
-    const res = await fetch('https://baas.kinvey.com/user/kid_HJ2sgDXeM/' + userId, {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Kinvey ' + authtoken,
-        'Content-Type': 'application/json'
-      },
+  getCurrentUser(userId, authtoken): Observable<any> {
+    return this.http.get('https://baas.kinvey.com/user/kid_HJ2sgDXeM/' + userId, {
+      headers: new HttpHeaders().set('Authorization', 'Kinvey ' + authtoken)
+        .set('Content-Type', 'application/json')
     });
-    return await res.json();
   }
 }

@@ -12,49 +12,49 @@ import {Router} from "@angular/router";
 export class SingleOrderComponent implements OnInit {
   @Input() order;
   @Input() canEdit;
-  constructor(
-    private catalogService: CatalogService,
-    private toastr: ToastrService,
-    private authService: AuthService,
-    private router: Router
-  ) { }
+
+  constructor(private catalogService: CatalogService,
+              private toastr: ToastrService,
+              private authService: AuthService,
+              private router: Router) {
+  }
 
   ngOnInit() {
   }
 
-  async cancelOrder(orderId){
+  cancelOrder(orderId) {
     this.toastr.toast('Removing order..');
-    const removedOrder = await this.catalogService.removeOrder(orderId, localStorage.getItem('authtoken'));
-    if (removedOrder.error) {
-      this.toastr.errorToast((removedOrder.description ? removedOrder.description : 'Unknown error occured. Please try again'));
-    }else{
-      const user = await this.authService.getCurrentUser(localStorage.getItem('userId'), localStorage.getItem('authtoken'));
-      if(user.error){
-        this.toastr.errorToast((removedOrder.description ? removedOrder.description : 'Unknown error occured. Please try again'));
-      }else{
-        if (user.orders.indexOf(this.order.productOrdered) !== -1) {
-          user.orders = user.orders.splice(user.orders.indexOf(this.order.productOrdered), 1);
-        }
-        const removeUserOrders = await this.catalogService.removeOrderFromUserList(user, localStorage.getItem('authtoken'));
-        if(removeUserOrders.error){
-          this.toastr.errorToast((removeUserOrders.description ? removeUserOrders.description : 'Unknown error occured. Please try again'));
-        }else{
-          const item = await this.catalogService.getItemDetails(this.order.productOrdered);
-          if(item.error){
-            this.toastr.errorToast((item.description ? item.description : 'Unknown error occured. Please try again'));
-          }else{
-            item.quantity = item.quantity+1;
-            const updateItem = await this.catalogService.postUpdateItem(this.order.productOrdered, item, localStorage.getItem('authtoken'));
-            if(updateItem.error){
-              this.toastr.errorToast((updateItem.description ? updateItem.description : 'Unknown error occured. Please try again'));
-            }else{
-              this.toastr.successToast('Order canceled.');
-              this.router.navigate(['/catalog']);
+    this.catalogService.removeOrder(orderId, localStorage.getItem('authtoken')).subscribe(RO => {
+        this.authService.getCurrentUser(localStorage.getItem('userId'), localStorage.getItem('authtoken')).subscribe(GCU => {
+            if (GCU.orders.indexOf(this.order.productOrdered) !== -1) {
+              GCU.orders = GCU.orders.splice(GCU.orders.indexOf(this.order.productOrdered), 1);
             }
-          }
-        }
-      }
-    }
+            this.catalogService.removeOrderFromUserList(GCU, localStorage.getItem('authtoken')).subscribe(ROFUL => {
+                this.catalogService.getItemDetails(this.order.productOrdered).subscribe(GID => {
+                    GID.quantity = GID.quantity + 1;
+                    this.catalogService.postUpdateItem(this.order.productOrdered, GID, localStorage.getItem('authtoken')).subscribe(PUI => {
+                        this.toastr.successToast('Order canceled.');
+                        this.router.navigate(['/catalog']);
+                      },
+                      errPUI => {
+                        this.toastr.errorToast((errPUI.error.description ? errPUI.error.description : 'Unknown error occured. Please try again'));
+                      });
+                  },
+                  errorGID => {
+                    this.toastr.errorToast((errorGID.error.description ? errorGID.error.description : 'Unknown error occured. Please try again'));
+                  });
+              },
+              errorROFUL => {
+                this.toastr.errorToast((errorROFUL.error.description ? errorROFUL.error.description : 'Unknown error occured. Please try again'));
+              });
+          },
+          errorGCU => {
+            this.toastr.errorToast((errorGCU.error.description ? errorGCU.error.description : 'Unknown error occured. Please try again'));
+          });
+      },
+      errorRO => {
+        this.toastr.errorToast((errorRO.error.description ? errorRO.error.description : 'Unknown error occured. Please try again'));
+      });
   }
 
 }

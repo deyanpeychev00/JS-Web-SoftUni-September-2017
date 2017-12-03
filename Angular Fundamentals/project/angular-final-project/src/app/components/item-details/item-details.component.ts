@@ -38,64 +38,62 @@ export class ItemDetailsComponent implements OnInit {
         this.itemId = params['id'];
       });
 
-      const res = await this.catalogService.getItemDetails(this.itemId);
-      if (res.error) {
-        this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
-      } else {
-        this.loadedItemDetails = true;
-        this.toastr.successToast('Details loaded.');
-        this.item = res;
-        if (res.quantity > 0) {
-          this.locationsService.displaySpecificLocations(res.storageLocation);
-        }
-      }
+      this.catalogService.getItemDetails(this.itemId).subscribe(res => {
+          this.loadedItemDetails = true;
+          this.toastr.successToast('Details loaded.');
+          this.item = res;
+          if (res.quantity > 0) {
+            this.locationsService.displaySpecificLocations(res.storageLocation);
+          }
+        },
+        err => {
+          this.toastr.errorToast((err.error.description ? err.error.description : 'Unknown error occured. Please try again'));
+        });
     }
   }
 
-  async deleteItem(id) {
-    const res = await
-    this.catalogService.postDeleteItem(id, localStorage.getItem('authtoken'));
-    if (res.error) {
-      this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
-    } else {
-      this.toastr.successToast('Item deleted.');
-      this.router.navigate(['/catalog']);
-    }
+  deleteItem(id) {
+    this.catalogService.postDeleteItem(id, localStorage.getItem('authtoken')).subscribe(data => {
+        this.toastr.successToast('Item deleted.');
+        this.router.navigate(['/catalog']);
+      },
+      err => {
+        this.toastr.errorToast((err.error.description ? err.error.description : 'Unknown error occured. Please try again'));
+      });
+
   }
 
   async orderItem(orderId) {
     let updatedOrders = [];
     this.toastr.toast('Processing your order..');
-    const user = await this.authService.getCurrentUser(localStorage.getItem('userId'), localStorage.getItem('authtoken'));
-    if (user.error) {
-      this.toastr.errorToast((user.description ? user.description : 'Unknown error occured. Please try again'));
-      return;
-    } else {
-      updatedOrders = user.orders;
-      updatedOrders.push(orderId);
-
-      const res = await this.catalogService.updateUserOrders(user, updatedOrders, localStorage.getItem('authtoken'));
-      if (res.error) {
-        this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
-      } else {
-        const prodUpd = await this.catalogService.updateOrders(this.item, localStorage.getItem('userId'), orderId, localStorage.getItem('authtoken'), localStorage.getItem('username'));
-        if(prodUpd.error){
-          this.toastr.errorToast((prodUpd.description ? prodUpd.description : 'Unknown error occured. Please try again'));
-        }else{
-          const item = await this.catalogService.getItemDetails(orderId);
-          if(item.error){
-            this.toastr.errorToast((item.description ? item.description : 'Unknown error occured. Please try again'));
-          }else{
-            item.quantity = item.quantity-1;
-            const updateItem = await this.catalogService.postUpdateItem(orderId, item, localStorage.getItem('authtoken'));
-            if(updateItem.error){
-              this.toastr.errorToast((updateItem.description ? updateItem.description : 'Unknown error occured. Please try again'));
-            }else{
-              this.toastr.successToast('Product ordered successfully. Please check your orders.');
-            }
-          }
-        }
-      }
-    }
+    this.authService.getCurrentUser(localStorage.getItem('userId'), localStorage.getItem('authtoken')).subscribe(GCU => {
+        updatedOrders = GCU.orders;
+        updatedOrders.push(orderId);
+        this.catalogService.updateUserOrders(GCU, updatedOrders, localStorage.getItem('authtoken')).subscribe(UUO => {
+            this.catalogService.updateOrders(this.item, localStorage.getItem('userId'), orderId, localStorage.getItem('authtoken'), localStorage.getItem('username')).subscribe(UO => {
+                this.catalogService.getItemDetails(orderId).subscribe(GID => {
+                    GID.quantity = GID.quantity - 1;
+                    this.catalogService.postUpdateItem(orderId, GID, localStorage.getItem('authtoken')).subscribe(PUI => {
+                        this.toastr.successToast('Product ordered successfully. Please check your orders.');
+                      },
+                      errorPUI => {
+                        this.toastr.errorToast((errorPUI.error.description ? errorPUI.error.description : 'Unknown error occured. Please try again'));
+                      });
+                  },
+                  errorGID => {
+                    this.toastr.errorToast((errorGID.error.description ? errorGID.error.description : 'Unknown error occured. Please try again'));
+                  });
+              },
+              errorUO => {
+                this.toastr.errorToast((errorUO.error.description ? errorUO.error.description : 'Unknown error occured. Please try again'));
+              });
+          },
+          errorUUO => {
+            this.toastr.errorToast((errorUUO.error.description ? errorUUO.error.description : 'Unknown error occured. Please try again'));
+          });
+      },
+      errorGCU => {
+        this.toastr.errorToast((errorGCU.error.description ? errorGCU.error.description : 'Unknown error occured. Please try again'));
+      });
   }
 }
