@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {AuthService} from "../../services/auth-service/auth.service";
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {ToastrService} from "../../services/toastr-service/toastr.service";
 
 @Component({
@@ -13,10 +13,9 @@ export class LoginPageComponent implements OnInit {
   username: string;
   password: string;
 
-  constructor(
-    private router: Router,
-    private toastr: ToastrService,
-    private auth: AuthService) {
+  constructor(private router: Router,
+              private toastr: ToastrService,
+              private auth: AuthService) {
   }
 
   ngOnInit() {
@@ -29,20 +28,21 @@ export class LoginPageComponent implements OnInit {
 
   async submitLogin() {
     this.toastr.toast('Logging in..');
-    const res = await this.auth.login(this.username, this.password);
-    if(res.error){
-      this.toastr.errorToast((res.description ? res.description : 'Unknown error occured. Please try again'));
-    }else{
-      if(res.isAdmin){
-        localStorage.setItem('role', res._id);
-      }else{
-        localStorage.setItem('role', 'init');
-      }
-      this.toastr.successToast('Successful login.');
-      localStorage.setItem('authtoken', res._kmd.authtoken);
-      localStorage.setItem('username', res.username);
-      localStorage.setItem('userId', res._id);
-      this.router.navigate(['/catalog']);
-    }
+    this.auth.loginObs(this.username, this.password).subscribe(data => {
+        if (data.isAdmin) {
+          localStorage.setItem('role', data._id);
+        } else {
+          localStorage.setItem('role', 'init');
+        }
+        this.toastr.successToast('Successful login.');
+        localStorage.setItem('authtoken', data._kmd.authtoken);
+        localStorage.setItem('username', data.username);
+        localStorage.setItem('userId', data._id);
+        this.router.navigate(['/catalog']);
+      },
+      err => {
+        console.log(err);
+        this.toastr.errorToast((err.error.description ? err.error.description : 'Unknown error occured. Please try again'));
+      });
   }
 }
