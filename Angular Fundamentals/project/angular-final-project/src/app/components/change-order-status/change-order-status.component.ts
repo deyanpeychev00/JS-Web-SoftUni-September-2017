@@ -41,6 +41,10 @@ export class ChangeOrderStatusComponent implements OnInit {
     }
   }
 
+  replaceSatusPlaceholder(incomingStatus){
+    this.newOrderStatus = incomingStatus;
+  }
+
   updateStatus(){
     this.orderToChange.status = this.newOrderStatus;
     if(this.orderToChange.status === '' || this.orderToChange.status === undefined || this.orderToChange.status === null){

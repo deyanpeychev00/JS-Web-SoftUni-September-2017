@@ -9,13 +9,18 @@
   <div class="row">
     <div class="input-field col s4 offset-s4">
       <div class="col-sm-4 ">
-        <i class="material-icons">access_time</i> Username
+        <i class="material-icons">access_time</i> Order status:
         <input type="text" class="form-control" id="newOrderStatus" placeholder="Enter order status" required name="newOrderStatus" [(ngModel)]="newOrderStatus" value="{{newOrderStatus}}">
       </div>
     </div>
   </div>
   <div class="row center">
-    <span class="center"><b>Note: </b>Please enter a valid order status ( <b class="red-text">Awaiting delivery</b> / <b class="red-text">Delivering</b> / <b class="red-text">Complete</b> )</span>
+    <span class="center"><b>Note: </b>
+      Please enter a valid order status (
+      <b class="red-text status-option" (click)="replaceSatusPlaceholder('Awaiting delivery')">Awaiting delivery</b> /
+      <b class="red-text status-option" (click)="replaceSatusPlaceholder('Delivering')" >Delivering</b> /
+      <b class="red-text status-option" (click)="replaceSatusPlaceholder('Complete')">Complete</b> )
+    </span>
   </div>
   <div class="row">
     <div class="col-sm-4 col-sm-offset-4 center">

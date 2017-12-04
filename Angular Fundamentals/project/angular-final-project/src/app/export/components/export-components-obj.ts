@@ -13,19 +13,19 @@ import {ManageOrdersComponent} from '../.././components/manage-orders/manage-ord
 import {ChangeOrderStatusComponent} from '../.././components/change-order-status/change-order-status.component';
 import {NotFoundComponent} from "../../components/404/404.component";
 
-export const ComponentsExport = [
-  AppComponent,
-  MainMapComponent,
-  RegisterPageComponent,
-  LoginPageComponent,
-  CatalogComponent,
-  ItemComponent,
-  AddProductComponent,
-  ItemDetailsComponent,
-  EditItemComponent,
-  MyOrdersComponent,
-  SingleOrderComponent,
-  ManageOrdersComponent,
-  ChangeOrderStatusComponent,
-  NotFoundComponent
-];
+export const ComponentsObj = {
+  App: AppComponent,
+  MainMap: MainMapComponent,
+  RegisterPage: RegisterPageComponent,
+  LoginPage: LoginPageComponent,
+  Catalog: CatalogComponent,
+  Item: ItemComponent,
+  AddProduct: AddProductComponent,
+  ItemDetails: ItemDetailsComponent,
+  EditItem: EditItemComponent,
+  MyOrders: MyOrdersComponent,
+  SingleOrder: SingleOrderComponent,
+  ManageOrders: ManageOrdersComponent,
+  ChangeOrderStatus: ChangeOrderStatusComponent,
+  NotFound: NotFoundComponent
+};

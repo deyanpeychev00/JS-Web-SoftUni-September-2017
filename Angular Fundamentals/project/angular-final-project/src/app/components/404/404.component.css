@@ -1,0 +1,29 @@
+div.content{
+  background-color: #94c1c7;
+  height: 100%;
+}
+.infoHeader{
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: -300px !important;
+  text-transform: uppercase;
+}
+
+.infoText{
+  font-size: 16px;
+}
+
+.row{
+  margin: 0;
+}
+.sleeping-dev{
+  width: 46%;
+}
+.sleep{
+  background-color: #7acfcc;
+}
+
+.bigger-text{
+  font-size: 16px;
+}
