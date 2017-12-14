@@ -1,4 +1,4 @@
-# AngularFinalProject – STORAGR
+# Angular Final Project – STORAGR
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.3. This project is a part of the Angular Fundamentals course at SoftUni.
