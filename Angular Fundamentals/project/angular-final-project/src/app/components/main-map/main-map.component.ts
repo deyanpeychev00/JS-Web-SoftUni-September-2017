@@ -8,13 +8,11 @@ import {ToastrService} from "../../services/toastr-service/toastr.service";
   styleUrls: ['./main-map.component.css']
 })
 export class MainMapComponent implements OnInit {
-  mapLoaded = false;
   constructor(private locationsService: LocationsService,
               private toastr: ToastrService) { }
 
   ngOnInit() {
     this.toastr.toast('Loading locations..');
     this.locationsService.loadMainMap();
-    this.mapLoaded = true;
   }
 }

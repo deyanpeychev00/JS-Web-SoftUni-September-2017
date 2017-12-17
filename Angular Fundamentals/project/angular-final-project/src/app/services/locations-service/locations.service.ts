@@ -16,6 +16,7 @@ export class LocationsService {
     const API = 'pk.eyJ1IjoiZGV5YW5wcGV5Y2hldiIsImEiOiJjajk0OHp1OHM0MTVsMnFtYnpvMmN2OHZjIn0.56yRPY_ti-lHyhTETtaXKg';
 
     const mymap = L.map(mapId).setView(BG, zoomLevel);
+
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + API, {
       maxZoom: 18,
       id: 'mapbox.streets',
@@ -39,6 +40,7 @@ export class LocationsService {
         const marker = L.marker([location.lat, location.long]).addTo(mymap).bindPopup(`<b>${location.name}</b>`);
       });
     });
+    return true;
   }
 
   displaySpecificLocations(locationsArray) {
